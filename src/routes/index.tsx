@@ -1585,7 +1585,7 @@ function NetscribesShowcase() {
           color: "#3A3E48", fontSize: 11, letterSpacing: "0.16em",
           textTransform: "uppercase", fontWeight: 500,
         }}>
-          © Netscribes · Samples microsite
+          © NETSCRIBES
         </div>
       </div>
 
