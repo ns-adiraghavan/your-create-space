@@ -732,12 +732,7 @@ function Header({ onHome }) {
         <img src={logoSrc} alt="Netscribes" style={{ height: 28, width: "auto" }}/>
       </button>
 
-      <nav style={{ display: "flex", alignItems: "center", gap: 24 }} className="ns-nav-links">
-        <span style={{
-          fontSize: 11, color: NS.muted, letterSpacing: "0.22em",
-          textTransform: "uppercase", fontWeight: 600,
-        }} className="ns-nav-tag">{"\n"} · 2024</span>
-      </nav>
+      <nav style={{ display: "flex", alignItems: "center", gap: 24 }} className="ns-nav-links" />
 
       <button style={{
         padding: "10px 20px",
@@ -795,7 +790,7 @@ function HeroIntro() {
             textWrap: "balance",
           }}>
             The work,{" "}
-            <em style={{ fontStyle: "italic", color: NS.blue }}>across every format.</em>
+            <em style={{ fontStyle: "normal", color: NS.blue }}>across every format.</em>
           </h1>
         </div>
         <p style={{
@@ -1605,10 +1600,6 @@ function NetscribesShowcase() {
           color: NS.muted, fontSize: 11, letterSpacing: "0.18em",
           textTransform: "uppercase", fontWeight: 600,
         }}>© NETSCRIBES</span>
-        <span style={{
-          color: NS.muted, fontSize: 11, letterSpacing: "0.18em",
-          textTransform: "uppercase", fontWeight: 600,
-        }}>Curated · 2024</span>
       </div>
 
       {modalPayload && (
