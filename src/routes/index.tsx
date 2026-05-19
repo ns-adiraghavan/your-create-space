@@ -778,7 +778,7 @@ function HeroIntro() {
             display: "flex", alignItems: "center", gap: 12,
           }}>
             <span style={{ display: "inline-block", width: 28, height: 1, background: NS.red }}/>
-            Content · Design · Video · Social
+            {"\n"}
           </p>
           <h1 style={{
             fontFamily: "'DM Sans', sans-serif",
