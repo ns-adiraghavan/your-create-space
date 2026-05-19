@@ -1470,7 +1470,7 @@ function FooterCTA() {
             fontSize: 10, fontWeight: 700, letterSpacing: "0.24em",
             textTransform: "uppercase", color: NS.redSoft,
             marginBottom: 14,
-          }}>Briefed and ready</p>
+          }}>{"\n"}</p>
           <h3 style={{
             fontFamily: "'DM Sans', sans-serif",
             fontWeight: 400,
