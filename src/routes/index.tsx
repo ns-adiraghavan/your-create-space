@@ -175,7 +175,7 @@ function WhitepaperMock({ accent }) {
 function POVMock({ accent }) {
   return (
     <FrameBase accent={accent} label="POV">
-      <text x="18" y="34" fill="#0F1B27" fontFamily="serif" fontSize="14" fontStyle="italic" opacity="0.95">"</text>
+      <text x="18" y="34" fill="#0F1B27" fontFamily="'DM Sans', sans-serif" fontSize="14"  opacity="0.95">"</text>
       <rect x="18" y="38" width="120" height="3" fill="#0F1B27" opacity="0.85"/>
       <rect x="18" y="44" width="160" height="3" fill="#0F1B27" opacity="0.85"/>
       <rect x="18" y="50" width="100" height="3" fill="#0F1B27" opacity="0.85"/>
@@ -373,8 +373,8 @@ function EventMock({ accent }) {
       <rect x="20" y="14" width="160" height="122" fill={accent} opacity="0.1"/>
       <rect x="20" y="14" width="160" height="122" fill="none" stroke={accent} strokeOpacity="0.4"/>
       <text x="100" y="50" fill="#0F1B27" fontSize="10" fontWeight="800" textAnchor="middle" fontFamily="sans-serif" letterSpacing="2">SUMMIT 2024</text>
-      <text x="100" y="78" fill={accent} fontSize="20" fontWeight="700" textAnchor="middle" fontFamily="serif" fontStyle="italic">Tomorrow,</text>
-      <text x="100" y="96" fill={accent} fontSize="20" fontWeight="700" textAnchor="middle" fontFamily="serif" fontStyle="italic">today.</text>
+      <text x="100" y="78" fill={accent} fontSize="20" fontWeight="700" textAnchor="middle" fontFamily="'DM Sans', sans-serif" >Tomorrow,</text>
+      <text x="100" y="96" fill={accent} fontSize="20" fontWeight="700" textAnchor="middle" fontFamily="'DM Sans', sans-serif" >today.</text>
       <rect x="80" y="108" width="40" height="2" fill={accent}/>
       <text x="100" y="124" fill="#0F1B27" opacity="0.6" fontSize="7" textAnchor="middle" fontFamily="sans-serif">28 NOV · MUMBAI</text>
     </FrameBase>
@@ -416,7 +416,7 @@ function PrintMock({ accent }) {
       <g transform="translate(40 12)">
         <rect width="120" height="126" fill="#F2EFE9" rx="1"/>
         <rect x="0" y="0" width="120" height="36" fill={accent} opacity="0.85"/>
-        <text x="60" y="22" fill="#F2EFE9" fontSize="11" fontWeight="800" textAnchor="middle" fontFamily="serif" letterSpacing="1">REPORT 2024</text>
+        <text x="60" y="22" fill="#F2EFE9" fontSize="11" fontWeight="800" textAnchor="middle" fontFamily="'DM Sans', sans-serif" letterSpacing="1">REPORT 2024</text>
         <rect x="60" y="28" width="0.5" height="4" fill="#F2EFE9"/>
         <text x="60" y="34" fill="#F2EFE9" fontSize="5" textAnchor="middle" fontFamily="sans-serif" letterSpacing="1.5">QUARTERLY</text>
         <rect x="10" y="46" width="60" height="3" fill="#22222A"/>
@@ -541,7 +541,7 @@ function StaticPostMock({ accent }) {
       <rect x="50" y="14" width="100" height="122" fill="#FFFFFF" stroke={accent} strokeOpacity="0.4" rx="3"/>
       <rect x="50" y="14" width="100" height="100" fill={accent} opacity="0.18"/>
       <text x="100" y="56" fill="#0F1B27" fontSize="9" fontWeight="800" textAnchor="middle" fontFamily="sans-serif" letterSpacing="1.5">THE FUTURE</text>
-      <text x="100" y="72" fill={accent} fontSize="14" fontWeight="700" textAnchor="middle" fontFamily="serif" fontStyle="italic">is now</text>
+      <text x="100" y="72" fill={accent} fontSize="14" fontWeight="700" textAnchor="middle" fontFamily="'DM Sans', sans-serif" >is now</text>
       <rect x="86" y="80" width="28" height="2" fill={accent}/>
       <text x="100" y="94" fill="#0F1B27" opacity="0.6" fontSize="5" textAnchor="middle" fontFamily="sans-serif" letterSpacing="1">#netscribes</text>
       <rect x="54" y="118" width="40" height="2" fill="#0F1B27" opacity="0.7"/>
@@ -573,8 +573,8 @@ function TeaserMock({ accent }) {
     <FrameBase accent={accent} label="Teaser">
       <rect x="14" y="14" width="172" height="116" fill="#FFFFFF" rx="3"/>
       <rect x="14" y="14" width="172" height="116" fill={accent} opacity="0.18" rx="3"/>
-      <text x="100" y="60" fill="#0F1B27" fontSize="16" fontWeight="800" textAnchor="middle" fontFamily="serif" fontStyle="italic">Coming</text>
-      <text x="100" y="84" fill={accent} fontSize="22" fontWeight="800" textAnchor="middle" fontFamily="serif" fontStyle="italic">Tomorrow.</text>
+      <text x="100" y="60" fill="#0F1B27" fontSize="16" fontWeight="800" textAnchor="middle" fontFamily="'DM Sans', sans-serif" >Coming</text>
+      <text x="100" y="84" fill={accent} fontSize="22" fontWeight="800" textAnchor="middle" fontFamily="'DM Sans', sans-serif" >Tomorrow.</text>
       <rect x="90" y="96" width="20" height="2" fill={accent}/>
       <text x="100" y="116" fill="#0F1B27" opacity="0.6" fontSize="6" textAnchor="middle" fontFamily="sans-serif" letterSpacing="2">15 SEC TEASER</text>
     </FrameBase>
@@ -626,7 +626,7 @@ function CarouselMock({ accent }) {
 function CopyMock({ accent }) {
   return (
     <FrameBase accent={accent} label="Copywriting">
-      <text x="20" y="36" fill={accent} fontFamily="serif" fontSize="28" fontStyle="italic">"</text>
+      <text x="20" y="36" fill={accent} fontFamily="'DM Sans', sans-serif" fontSize="28" >"</text>
       <rect x="20" y="48" width="160" height="2" fill="#0F1B27" opacity="0.9"/>
       <rect x="20" y="56" width="140" height="2" fill="#0F1B27" opacity="0.9"/>
       <rect x="20" y="64" width="160" height="2" fill="#0F1B27" opacity="0.9"/>
@@ -732,12 +732,7 @@ function Header({ onHome }) {
         <img src={logoSrc} alt="Netscribes" style={{ height: 28, width: "auto" }}/>
       </button>
 
-      <nav style={{ display: "flex", alignItems: "center", gap: 24 }} className="ns-nav-links">
-        <span style={{
-          fontSize: 11, color: NS.muted, letterSpacing: "0.22em",
-          textTransform: "uppercase", fontWeight: 600,
-        }} className="ns-nav-tag">{"\n"} · 2024</span>
-      </nav>
+      <nav style={{ display: "flex", alignItems: "center", gap: 24 }} className="ns-nav-links" />
 
       <button style={{
         padding: "10px 20px",
@@ -786,7 +781,7 @@ function HeroIntro() {
             Content · Design · Video · Social
           </p>
           <h1 style={{
-            fontFamily: "'Instrument Serif', serif",
+            fontFamily: "'DM Sans', sans-serif",
             fontWeight: 400,
             fontSize: "clamp(44px, 6.4vw, 76px)",
             lineHeight: 1.02,
@@ -795,7 +790,7 @@ function HeroIntro() {
             textWrap: "balance",
           }}>
             The work,{" "}
-            <em style={{ fontStyle: "italic", color: NS.blue }}>across every format.</em>
+            <em style={{ fontStyle: "normal", color: NS.blue }}>across every format.</em>
           </h1>
         </div>
         <p style={{
@@ -885,7 +880,7 @@ function HeroTile({ cat, index, onClick, mobile }) {
 
       <div style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "flex-end", gap: 14 }}>
         <h2 style={{
-          fontFamily: "'Instrument Serif', serif",
+          fontFamily: "'DM Sans', sans-serif",
           fontWeight: 400,
           fontSize: mobile ? 44 : "clamp(46px, 5.2vw, 64px)",
           letterSpacing: "-0.025em",
@@ -1004,7 +999,7 @@ function StripTile({ cat, active, onClick, borderRight, borderBottom, mobile }) 
       </div>
       <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: 8 }}>
         <h3 style={{
-          fontFamily: "'Instrument Serif', serif",
+          fontFamily: "'DM Sans', sans-serif",
           fontWeight: 400,
           fontSize: mobile ? 24 : 30,
           letterSpacing: "-0.02em",
@@ -1048,7 +1043,7 @@ function SectionBanner({ cat, mobile }) {
             textTransform: "uppercase", color: cat.color, marginBottom: 8,
           }}>Now showing · {cat.tag} samples</p>
           <h2 style={{
-            fontFamily: "'Instrument Serif', serif",
+            fontFamily: "'DM Sans', sans-serif",
             fontWeight: 400,
             fontSize: mobile ? 32 : 44,
             letterSpacing: "-0.02em",
@@ -1158,7 +1153,7 @@ function ParentCard({ sub, accent, industry, onPreview }) {
           textTransform: "uppercase", color: accent, marginBottom: 10,
         }}>{sub.formats.length} formats</p>
         <h3 style={{
-          fontFamily: "'Instrument Serif', serif",
+          fontFamily: "'DM Sans', sans-serif",
           fontWeight: 400,
           fontSize: 30, lineHeight: 1.05,
           letterSpacing: "-0.015em",
@@ -1230,7 +1225,7 @@ function LeafCard({ sub, accent, industry, onPreview }) {
           transition: "color 0.22s",
         }}>Direct sample</p>
         <h3 style={{
-          fontFamily: "'Instrument Serif', serif",
+          fontFamily: "'DM Sans', sans-serif",
           fontWeight: 400,
           fontSize: 30, lineHeight: 1.05,
           letterSpacing: "-0.015em",
@@ -1405,7 +1400,7 @@ function SampleModal({ payload, onClose }) {
             )}
           </div>
           <h2 style={{
-            fontFamily: "'Instrument Serif', serif",
+            fontFamily: "'DM Sans', sans-serif",
             fontWeight: 400,
             fontSize: 28,
             color: NS.ink,
@@ -1477,7 +1472,7 @@ function FooterCTA() {
             marginBottom: 14,
           }}>Briefed and ready</p>
           <h3 style={{
-            fontFamily: "'Instrument Serif', serif",
+            fontFamily: "'DM Sans', sans-serif",
             fontWeight: 400,
             fontSize: "clamp(30px, 3.4vw, 44px)",
             letterSpacing: "-0.022em",
@@ -1605,10 +1600,6 @@ function NetscribesShowcase() {
           color: NS.muted, fontSize: 11, letterSpacing: "0.18em",
           textTransform: "uppercase", fontWeight: 600,
         }}>© NETSCRIBES</span>
-        <span style={{
-          color: NS.muted, fontSize: 11, letterSpacing: "0.18em",
-          textTransform: "uppercase", fontWeight: 600,
-        }}>Curated · 2024</span>
       </div>
 
       {modalPayload && (
