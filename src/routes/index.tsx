@@ -800,7 +800,7 @@ function HeroIntro() {
           maxWidth: 360,
           fontWeight: 400,
         }}>
-          Four practices, one library. Pick a service — every tile opens onto real samples, filterable by industry.
+          Pick a service — every tile opens onto real samples, filterable by industry.
         </p>
       </div>
     </div>
