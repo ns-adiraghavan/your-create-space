@@ -789,7 +789,7 @@ function HeroIntro() {
             color: NS.ink,
             textWrap: "balance",
           }}>
-            The work,{" "}
+            A partner for you,{" "}
             <em style={{ fontStyle: "normal", color: NS.blue }}>across every format.</em>
           </h1>
         </div>
