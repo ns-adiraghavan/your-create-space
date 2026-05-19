@@ -958,7 +958,7 @@ function Header({ onHome, accentColor }) {
         <span style={{
           fontSize: 12, color: "#7A7E88", letterSpacing: "0.16em",
           textTransform: "uppercase", fontWeight: 500,
-        }} className="ns-nav-tag">Sample Showcase</span>
+        }} className="ns-nav-tag">{"\n"}</span>
       </nav>
 
       <button style={{
