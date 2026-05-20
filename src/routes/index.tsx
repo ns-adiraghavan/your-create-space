@@ -941,7 +941,9 @@ function Header({ onHome, onRequestSample }) {
 
       <nav style={{ display: "flex", alignItems: "center", gap: 24 }} className="ns-nav-links" />
 
-      <button style={{
+      <button
+        onClick={onRequestSample}
+        style={{
         padding: "10px 20px",
         borderRadius: 2,
         background: NS.blue,
