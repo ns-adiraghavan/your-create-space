@@ -1484,7 +1484,7 @@ function FormatCard({ format, category, accent, onClick }) {
 
 // ─── Modal ────────────────────────────────────────────────────────
 
-function SampleModal({ payload, onClose }) {
+function SampleModal({ payload, onClose, onRequestSample }) {
   const { format, category, industry, parent } = payload;
   const data = (CURATED[category] && CURATED[category][format]) || {
     title: `${format} Sample`,
