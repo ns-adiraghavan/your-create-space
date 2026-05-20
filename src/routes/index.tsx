@@ -50,8 +50,6 @@ const INDUSTRIES = [
 const CONTENT_SUBS = [
   { id: "tl",    name: "Thought Leadership", kind: "parent", formats: ["Whitepaper","POV","TL Blog","Report","eBook"] },
   { id: "short", name: "Short-form",         kind: "parent", formats: ["Emailer","Newsletter","Brochure","Case Study","Video Script"] },
-  { id: "web",   name: "Web Copies",         kind: "leaf",   format: "Web Copies" },
-  { id: "ppt",   name: "PPT / Deck",         kind: "leaf",   format: "PPT / Deck" },
 ];
 
 const DESIGN_FORMATS = ["Infographics","PPT","Event Based Assets","Landing Page","Web Banners","Print Publications","eBooks","Report Design"];
