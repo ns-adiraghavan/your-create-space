@@ -50,8 +50,6 @@ const INDUSTRIES = [
 const CONTENT_SUBS = [
   { id: "tl",    name: "Thought Leadership", kind: "parent", formats: ["Whitepaper","POV","TL Blog","Report","eBook"] },
   { id: "short", name: "Short-form",         kind: "parent", formats: ["Emailer","Newsletter","Brochure","Case Study","Video Script"] },
-  { id: "web",   name: "Web Copies",         kind: "leaf",   format: "Web Copies" },
-  { id: "ppt",   name: "PPT / Deck",         kind: "leaf",   format: "PPT / Deck" },
 ];
 
 const DESIGN_FORMATS = ["Infographics","PPT","Event Based Assets","Landing Page","Web Banners","Print Publications","eBooks","Report Design"];
@@ -881,7 +879,7 @@ function HeroTile({ cat, index, onClick, mobile }) {
       <div style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "flex-end", gap: 14 }}>
         <h2 style={{
           fontFamily: "'DM Sans', sans-serif",
-          fontWeight: 400,
+          fontWeight: 700,
           fontSize: mobile ? 44 : "clamp(46px, 5.2vw, 64px)",
           letterSpacing: "-0.025em",
           lineHeight: 0.98,
@@ -1000,7 +998,7 @@ function StripTile({ cat, active, onClick, borderRight, borderBottom, mobile }) 
       <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: 8 }}>
         <h3 style={{
           fontFamily: "'DM Sans', sans-serif",
-          fontWeight: 400,
+          fontWeight: 700,
           fontSize: mobile ? 24 : 30,
           letterSpacing: "-0.02em",
           lineHeight: 1,
@@ -1119,144 +1117,95 @@ function FilterRow({ industry, setIndustry, accent, mobile }) {
 // ─── Detail panels per category ──────────────────────────────────
 
 function ContentDetail({ accent, industry, onPreview, mobile }) {
+  const [openId, setOpenId] = useState(CONTENT_SUBS[0]?.id ?? null);
   return (
-    <div style={{
-      display: "grid",
-      gridTemplateColumns: mobile ? "1fr" : "repeat(2, 1fr)",
-      gap: mobile ? 14 : 18,
-    }}>
-      {CONTENT_SUBS.map(sub => sub.kind === "parent" ? (
-        <ParentCard key={sub.id} sub={sub} accent={accent} industry={industry} onPreview={onPreview}/>
-      ) : (
-        <LeafCard key={sub.id} sub={sub} accent={accent} industry={industry} onPreview={onPreview}/>
+    <div style={{ display: "flex", flexDirection: "column", gap: mobile ? 14 : 18 }}>
+      {CONTENT_SUBS.map(sub => (
+        <ParentCard
+          key={sub.id}
+          sub={sub}
+          accent={accent}
+          industry={industry}
+          onPreview={onPreview}
+          open={openId === sub.id}
+          onToggle={() => setOpenId(prev => prev === sub.id ? null : sub.id)}
+          mobile={mobile}
+        />
       ))}
     </div>
   );
 }
 
-function ParentCard({ sub, accent, industry, onPreview }) {
+function ParentCard({ sub, accent, industry, onPreview, open, onToggle, mobile }) {
   return (
     <div style={{
       background: NS.surface,
       border: `1px solid ${NS.rule}`,
       borderLeft: `3px solid ${accent}`,
-      padding: "26px 26px 24px",
-      display: "flex",
-      flexDirection: "column",
-      gap: 20,
-      position: "relative",
       overflow: "hidden",
     }}>
-      <div>
-        <p style={{
-          fontSize: 10, fontWeight: 700, letterSpacing: "0.22em",
-          textTransform: "uppercase", color: accent, marginBottom: 10,
-        }}>{sub.formats.length} formats</p>
-        <h3 style={{
+      <button
+        onClick={onToggle}
+        style={{
+          width: "100%",
+          textAlign: "left",
+          background: "transparent",
+          border: "none",
+          padding: mobile ? "22px 22px" : "26px 28px",
+          cursor: "pointer",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          gap: 16,
           fontFamily: "'DM Sans', sans-serif",
-          fontWeight: 400,
-          fontSize: 30, lineHeight: 1.05,
-          letterSpacing: "-0.015em",
-          color: NS.ink,
-        }}>{sub.name}</h3>
-      </div>
-      <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
-        {sub.formats.map(fmt => (
-          <button
-            key={fmt}
-            onClick={() => onPreview({ format: fmt, category: "content", industry, parent: sub.name })}
-            style={{
-              padding: "7px 13px",
-              borderRadius: 2,
-              background: NS.paper,
-              border: `1px solid ${NS.rule}`,
-              color: NS.inkSoft,
-              fontSize: 12,
-              fontWeight: 500,
-              fontFamily: "'DM Sans', sans-serif",
-              cursor: "pointer",
-              transition: "all 0.18s",
-              letterSpacing: "0.01em",
-            }}
-            onMouseEnter={e => {
-              e.currentTarget.style.background = accent;
-              e.currentTarget.style.borderColor = accent;
-              e.currentTarget.style.color = "#FFFFFF";
-            }}
-            onMouseLeave={e => {
-              e.currentTarget.style.background = NS.paper;
-              e.currentTarget.style.borderColor = NS.rule;
-              e.currentTarget.style.color = NS.inkSoft;
-            }}
-          >{fmt}</button>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-function LeafCard({ sub, accent, industry, onPreview }) {
-  const [hov, setHov] = useState(false);
-  return (
-    <button
-      onClick={() => onPreview({ format: sub.format, category: "content", industry })}
-      onMouseEnter={() => setHov(true)}
-      onMouseLeave={() => setHov(false)}
-      style={{
-        textAlign: "left",
-        background: hov ? accent : NS.surface,
-        border: `1px solid ${hov ? accent : NS.rule}`,
-        borderLeft: `3px solid ${accent}`,
-        padding: "26px 26px 24px",
-        cursor: "pointer",
-        display: "flex",
-        flexDirection: "column",
-        gap: 20,
-        position: "relative",
-        overflow: "hidden",
-        transition: "all 0.22s",
-        fontFamily: "'DM Sans', sans-serif",
-      }}
-    >
-      <div>
-        <p style={{
-          fontSize: 10, fontWeight: 700, letterSpacing: "0.22em",
-          textTransform: "uppercase", color: hov ? "rgba(255,255,255,0.85)" : accent, marginBottom: 10,
-          transition: "color 0.22s",
-        }}>Direct sample</p>
-        <h3 style={{
-          fontFamily: "'DM Sans', sans-serif",
-          fontWeight: 400,
-          fontSize: 30, lineHeight: 1.05,
-          letterSpacing: "-0.015em",
-          color: hov ? "#FFFFFF" : NS.ink,
-          transition: "color 0.22s",
-        }}>{sub.name}</h3>
-      </div>
-      <div style={{
-        display: "flex", alignItems: "center", justifyContent: "space-between",
-        gap: 12,
-      }}>
-        <p style={{
-          fontSize: 13,
-          color: hov ? "rgba(255,255,255,0.85)" : NS.inkSoft,
-          lineHeight: 1.5,
-          transition: "color 0.22s",
-        }}>
-          {sub.id === "web"
-            ? "Hero, value props, FAQs — ready to ship."
-            : "Investor-ready decks with editorial polish."}
-        </p>
+        }}
+      >
+        <div>
+          <p style={{
+            fontSize: 10, fontWeight: 700, letterSpacing: "0.22em",
+            textTransform: "uppercase", color: accent, marginBottom: 8,
+          }}>{sub.formats.length} formats</p>
+          <h3 style={{
+            fontFamily: "'DM Sans', sans-serif",
+            fontWeight: 700,
+            fontSize: mobile ? 26 : 30, lineHeight: 1.05,
+            letterSpacing: "-0.015em",
+            color: NS.ink,
+          }}>{sub.name}</h3>
+        </div>
         <span style={{
-          width: 36, height: 36, borderRadius: "50%",
-          background: hov ? "#FFFFFF" : accent + "14",
-          color: hov ? accent : accent,
+          width: 38, height: 38, borderRadius: "50%",
+          background: accent + "14", color: accent,
           display: "flex", alignItems: "center", justifyContent: "center",
-          fontSize: 16, flexShrink: 0,
-          transition: "all 0.22s",
-        }}>→</span>
-      </div>
-    </button>
+          fontSize: 18, flexShrink: 0,
+          transition: "transform 0.25s",
+          transform: open ? "rotate(45deg)" : "none",
+        }}>+</span>
+      </button>
+      {open && (
+        <div style={{
+          padding: mobile ? "0 16px 20px" : "0 24px 26px",
+          borderTop: `1px solid ${NS.ruleSoft}`,
+          paddingTop: mobile ? 16 : 22,
+        }}>
+          <div style={{
+            display: "grid",
+            gridTemplateColumns: mobile ? "repeat(2, 1fr)" : "repeat(3, 1fr)",
+            gap: mobile ? 12 : 16,
+          }}>
+            {sub.formats.map(fmt => (
+              <FormatCard
+                key={fmt}
+                format={fmt}
+                category="content"
+                accent={accent}
+                onClick={() => onPreview({ format: fmt, category: "content", industry, parent: sub.name })}
+              />
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
   );
 }
 
