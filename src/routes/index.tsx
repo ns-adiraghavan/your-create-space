@@ -879,7 +879,7 @@ function HeroTile({ cat, index, onClick, mobile }) {
       <div style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "flex-end", gap: 14 }}>
         <h2 style={{
           fontFamily: "'DM Sans', sans-serif",
-          fontWeight: 400,
+          fontWeight: 700,
           fontSize: mobile ? 44 : "clamp(46px, 5.2vw, 64px)",
           letterSpacing: "-0.025em",
           lineHeight: 0.98,
