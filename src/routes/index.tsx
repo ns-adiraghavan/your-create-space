@@ -1720,7 +1720,10 @@ function NetscribesShowcase() {
     }}>
       <GlobalStyles/>
 
-      <Header onHome={() => { setSelected(null); setIndustry(null); }}/>
+      <Header
+        onHome={() => { setSelected(null); setIndustry(null); }}
+        onRequestSample={() => openRequest()}
+      />
 
       <main>
         {!selected ? (
