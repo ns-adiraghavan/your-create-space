@@ -54,7 +54,7 @@ const CONTENT_SUBS = [
 
 const DESIGN_FORMATS = ["Infographics","PPT","Event Based Assets","Landing Page","Web Banners","Print Publications","eBooks","Report Design"];
 const VIDEO_FORMATS  = ["Motion Graphics","Footage / Image Based","Reels and Shorts","Podcast Interviews","Training Videos","Whiteboard Animation"];
-const SOCIAL_FORMATS = ["Copywriting","Static Post Design","GIFs","Teasers","Memes","Carousel","Corporate Comics"];
+const SOCIAL_FORMATS = ["Static Post Design","GIFs","Teasers","Memes","Carousel","Corporate Comics"];
 
 const CURATED = {
   content: {
