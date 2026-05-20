@@ -1755,7 +1755,10 @@ function NetscribesShowcase() {
         )}
       </main>
 
-      <FooterCTA/>
+      <FooterCTA
+        onRequestSample={() => openRequest()}
+        onTalkStrategist={() => setStrategistOpen(true)}
+      />
 
       <div style={{
         borderTop: `1px solid ${NS.rule}`,
