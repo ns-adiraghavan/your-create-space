@@ -998,7 +998,7 @@ function StripTile({ cat, active, onClick, borderRight, borderBottom, mobile }) 
       <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: 8 }}>
         <h3 style={{
           fontFamily: "'DM Sans', sans-serif",
-          fontWeight: 400,
+          fontWeight: 700,
           fontSize: mobile ? 24 : 30,
           letterSpacing: "-0.02em",
           lineHeight: 1,
