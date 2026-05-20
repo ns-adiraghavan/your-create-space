@@ -1611,7 +1611,7 @@ function SampleModal({ payload, onClose, onRequestSample }) {
 
 // ─── Footer CTA ───────────────────────────────────────────────────
 
-function FooterCTA() {
+function FooterCTA({ onRequestSample, onTalkStrategist }) {
   return (
     <section style={{
       maxWidth: 1160,
@@ -1649,7 +1649,9 @@ function FooterCTA() {
           </p>
         </div>
         <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
-          <button style={{
+          <button
+            onClick={onRequestSample}
+            style={{
             padding: "14px 24px",
             borderRadius: 2,
             background: NS.red,
@@ -1660,7 +1662,9 @@ function FooterCTA() {
             fontFamily: "'DM Sans', sans-serif",
             letterSpacing: "0.01em",
           }}>Request samples →</button>
-          <button style={{
+          <button
+            onClick={onTalkStrategist}
+            style={{
             padding: "14px 22px",
             borderRadius: 2,
             background: "transparent",
