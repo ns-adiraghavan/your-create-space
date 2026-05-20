@@ -706,6 +706,215 @@ function FormatMock({ type, accent }) {
   return <Comp accent={accent} label={type}/>;
 }
 
+// ─── Lead capture modals ──────────────────────────────────────────
+
+function useLockScroll(onClose) {
+  useEffect(() => {
+    const h = e => e.key === "Escape" && onClose();
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", h);
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", h);
+    };
+  }, [onClose]);
+}
+
+function FormField({ label, type = "text", value, onChange, required, textarea, autoFocus }) {
+  const shared = {
+    value,
+    onChange: e => onChange(e.target.value),
+    required,
+    autoFocus,
+    style: {
+      width: "100%",
+      padding: "11px 13px",
+      fontSize: 14,
+      fontFamily: "'DM Sans', sans-serif",
+      color: NS.ink,
+      background: NS.paper,
+      border: `1px solid ${NS.rule}`,
+      borderRadius: 2,
+      outline: "none",
+      transition: "border-color 0.18s, background 0.18s",
+      resize: textarea ? "vertical" : "none",
+    },
+    onFocus: e => { e.currentTarget.style.borderColor = NS.blue; e.currentTarget.style.background = NS.surface; },
+    onBlur:  e => { e.currentTarget.style.borderColor = NS.rule; e.currentTarget.style.background = NS.paper; },
+  };
+  return (
+    <label style={{ display: "block", marginBottom: 14 }}>
+      <span style={{
+        display: "block", fontSize: 10, fontWeight: 700, letterSpacing: "0.18em",
+        textTransform: "uppercase", color: NS.muted, marginBottom: 6,
+      }}>{label}{required && " *"}</span>
+      {textarea
+        ? <textarea {...shared} rows={4}/>
+        : <input type={type} {...shared}/>}
+    </label>
+  );
+}
+
+function LeadModal({ title, eyebrow, blurb, fields, submitLabel, accent = NS.blue, onClose, onSubmit }) {
+  useLockScroll(onClose);
+  const [values, setValues] = useState(() => Object.fromEntries(fields.map(f => [f.name, ""])));
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    onSubmit?.(values);
+    setSubmitted(true);
+  };
+
+  return (
+    <div onClick={onClose} style={{
+      position: "fixed", inset: 0, zIndex: 1100,
+      background: "rgba(15, 27, 39, 0.55)",
+      backdropFilter: "blur(8px)", WebkitBackdropFilter: "blur(8px)",
+      display: "flex", alignItems: "center", justifyContent: "center",
+      padding: 20, animation: "ns-fade .25s ease", overflow: "auto",
+    }}>
+      <div onClick={e => e.stopPropagation()} style={{
+        width: "100%", maxWidth: 440,
+        background: NS.surface,
+        border: `1px solid ${NS.rule}`,
+        borderTop: `3px solid ${accent}`,
+        animation: "ns-pop .35s cubic-bezier(0.22,1,0.36,1)",
+        boxShadow: "0 30px 80px rgba(15,27,39,0.18)",
+        position: "relative",
+      }}>
+        <button onClick={onClose} aria-label="Close" style={{
+          position: "absolute", top: 14, right: 14, zIndex: 2,
+          background: NS.surface, border: `1px solid ${NS.rule}`,
+          color: NS.ink, cursor: "pointer", borderRadius: "50%",
+          width: 30, height: 30, fontSize: 16,
+          display: "flex", alignItems: "center", justifyContent: "center",
+        }}>×</button>
+
+        <div style={{ padding: "26px 28px 24px" }}>
+          {submitted ? (
+            <div style={{ textAlign: "center", padding: "14px 0 8px" }}>
+              <p style={{
+                fontSize: 10, fontWeight: 700, letterSpacing: "0.24em",
+                textTransform: "uppercase", color: NS.red, marginBottom: 14,
+              }}>You're in</p>
+              <h2 style={{
+                fontFamily: "'DM Sans', sans-serif", fontWeight: 700,
+                fontSize: 24, color: NS.ink, lineHeight: 1.15,
+                letterSpacing: "-0.02em", marginBottom: 10,
+              }}>Thank you, {values.name?.split(" ")[0] || "there"}.</h2>
+              <p style={{
+                color: NS.inkSoft, fontSize: 13.5, lineHeight: 1.6, marginBottom: 22,
+              }}>We'll be in touch shortly with what you asked for.</p>
+              <button onClick={onClose} style={{
+                padding: "11px 22px", borderRadius: 2, background: accent,
+                border: "none", color: "#FFFFFF", fontWeight: 600, fontSize: 13,
+                cursor: "pointer", fontFamily: "'DM Sans', sans-serif",
+                letterSpacing: "0.01em",
+              }}>Close</button>
+            </div>
+          ) : (
+            <>
+              {eyebrow && <p style={{
+                fontSize: 10, fontWeight: 700, letterSpacing: "0.24em",
+                textTransform: "uppercase", color: accent, marginBottom: 12,
+              }}>{eyebrow}</p>}
+              <h2 style={{
+                fontFamily: "'DM Sans', sans-serif", fontWeight: 700,
+                fontSize: 24, color: NS.ink, lineHeight: 1.15,
+                letterSpacing: "-0.02em", marginBottom: 8,
+              }}>{title}</h2>
+              {blurb && <p style={{
+                color: NS.inkSoft, fontSize: 13.5, lineHeight: 1.6, marginBottom: 20,
+              }}>{blurb}</p>}
+              <form onSubmit={handleSubmit}>
+                {fields.map((f, i) => (
+                  <FormField
+                    key={f.name}
+                    label={f.label}
+                    type={f.type}
+                    textarea={f.textarea}
+                    required={f.required}
+                    autoFocus={i === 0}
+                    value={values[f.name]}
+                    onChange={v => setValues(s => ({ ...s, [f.name]: v }))}
+                  />
+                ))}
+                <button type="submit" style={{
+                  width: "100%", padding: "13px 0", borderRadius: 2,
+                  background: accent, border: "none", color: "#FFFFFF",
+                  fontWeight: 600, fontSize: 14, cursor: "pointer",
+                  fontFamily: "'DM Sans', sans-serif", letterSpacing: "0.01em",
+                  marginTop: 4,
+                }}>{submitLabel}</button>
+              </form>
+            </>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function RequestSampleModal({ context, onClose }) {
+  const handleSubmit = values => {
+    // Simulate download — generate a small text file based on context
+    const title = context?.title || "Netscribes Sample";
+    const body =
+`NETSCRIBES — SAMPLE REQUEST
+
+Sample: ${title}
+${context?.format ? `Format: ${context.format}\n` : ""}
+Requested by: ${values.name} (${values.company})
+Email: ${values.email}
+
+Thank you for requesting a sample. A high-resolution copy will follow by email.
+`;
+    const blob = new Blob([body], { type: "text/plain" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `netscribes-${(context?.format || "sample").toLowerCase().replace(/[^a-z0-9]+/g, "-")}.txt`;
+    document.body.appendChild(a); a.click(); a.remove();
+    URL.revokeObjectURL(url);
+  };
+  return (
+    <LeadModal
+      eyebrow="Request sample"
+      title={context?.title ? `Download "${context.title}"` : "Get a sample pack"}
+      blurb="Tell us where to send it — we'll deliver the file straight to your inbox and start the download now."
+      submitLabel="Download sample →"
+      accent={NS.blue}
+      fields={[
+        { name: "name",    label: "Full name", required: true },
+        { name: "company", label: "Company",   required: true },
+        { name: "email",   label: "Work email", type: "email", required: true },
+      ]}
+      onClose={onClose}
+      onSubmit={handleSubmit}
+    />
+  );
+}
+
+function StrategistModal({ onClose }) {
+  return (
+    <LeadModal
+      eyebrow="Talk to a strategist"
+      title="Let's scope it together."
+      blurb="Share a few details and a strategist will reach out within one working day."
+      submitLabel="Send message →"
+      accent={NS.red}
+      fields={[
+        { name: "name",    label: "Full name",     required: true },
+        { name: "email",   label: "Work email",    type: "email", required: true },
+        { name: "phone",   label: "Phone number",  type: "tel" },
+        { name: "message", label: "Message",       textarea: true, required: true },
+      ]}
+      onClose={onClose}
+    />
+  );
+}
+
 // ─── Header ───────────────────────────────────────────────────────
 
 function Header({ onHome }) {
