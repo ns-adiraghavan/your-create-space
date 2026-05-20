@@ -1579,7 +1579,9 @@ function SampleModal({ payload, onClose, onRequestSample }) {
             }}>{data.pages} pages</p>
           )}
           <div style={{ display: "flex", gap: 8 }}>
-            <button style={{
+            <button
+              onClick={() => onRequestSample?.({ title: data.title, format })}
+              style={{
               flex: 1,
               padding: "12px 0",
               borderRadius: 2,
