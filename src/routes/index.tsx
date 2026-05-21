@@ -947,45 +947,6 @@ function LeadModal({ title, eyebrow, blurb, fields, submitLabel, accent = NS.blu
   );
 }
 
-function RequestSampleModal({ context, onClose }) {
-  const handleSubmit = values => {
-    // Simulate download — generate a small text file based on context
-    const title = context?.title || "Netscribes Sample";
-    const body =
-`NETSCRIBES — SAMPLE REQUEST
-
-Sample: ${title}
-${context?.format ? `Format: ${context.format}\n` : ""}
-Requested by: ${values.name} (${values.company})
-Email: ${values.email}
-
-Thank you for requesting a sample. A high-resolution copy will follow by email.
-`;
-    const blob = new Blob([body], { type: "text/plain" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = `netscribes-${(context?.format || "sample").toLowerCase().replace(/[^a-z0-9]+/g, "-")}.txt`;
-    document.body.appendChild(a); a.click(); a.remove();
-    URL.revokeObjectURL(url);
-  };
-  return (
-    <LeadModal
-      eyebrow="Request sample"
-      title={context?.title ? `Download "${context.title}"` : "Get a sample pack"}
-      blurb="Tell us where to send it — we'll deliver the file straight to your inbox and start the download now."
-      submitLabel="Download sample →"
-      accent={NS.blue}
-      fields={[
-        { name: "name",    label: "Full name", required: true },
-        { name: "company", label: "Company",   required: true },
-        { name: "email",   label: "Work email", type: "email", required: true },
-      ]}
-      onClose={onClose}
-      onSubmit={handleSubmit}
-    />
-  );
-}
 
 function StrategistModal({ onClose }) {
   return (
