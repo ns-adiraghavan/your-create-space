@@ -1703,7 +1703,7 @@ function SampleModal({ payload, onClose }) {
 
 // ─── Footer CTA ───────────────────────────────────────────────────
 
-function FooterCTA({ onRequestSample, onTalkStrategist }) {
+function FooterCTA({ onTalkStrategist }) {
   return (
     <section style={{
       maxWidth: 1160,
