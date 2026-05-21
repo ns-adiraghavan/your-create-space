@@ -1505,21 +1505,33 @@ function ParentCard({ sub, accent, industry, onPreview, open, onToggle, mobile }
 }
 
 function FormatGrid({ formats, category, accent, industry, onPreview, mobile }) {
+  const visible = industry
+    ? formats.filter(fmt => {
+        const list = (CURATED[category] && CURATED[category][fmt]) || [];
+        return list.some(s => s.industry === industry);
+      })
+    : formats;
+
+  if (visible.length === 0) {
+    const indLabel = INDUSTRIES.find(i => i.id === industry)?.label;
+    const catLabel = CAT_BY_ID[category]?.label;
+    return (
+      <p style={{ textAlign: "center", color: NS.muted, fontSize: 13, padding: "40px 0", fontFamily: "'DM Sans', sans-serif" }}>
+        No {catLabel} samples for {indLabel} yet.
+      </p>
+    );
+  }
+
   return (
     <div style={{
       display: "grid",
       gridTemplateColumns: mobile ? "repeat(2, 1fr)" : "repeat(4, 1fr)",
       gap: mobile ? 12 : 16,
     }}>
-      {formats.map(fmt => {
-        const list = (CURATED[category] && CURATED[category][fmt]) || [];
-        const disabled = !!industry && !list.some(s => s.industry === industry);
-        return (
-          <FormatCard key={fmt} format={fmt} category={category} accent={accent}
-            disabled={disabled}
-            onClick={() => !disabled && onPreview({ format: fmt, category, industry })}/>
-        );
-      })}
+      {visible.map(fmt => (
+        <FormatCard key={fmt} format={fmt} category={category} accent={accent}
+          onClick={() => onPreview({ format: fmt, category, industry })}/>
+      ))}
     </div>
   );
 }
