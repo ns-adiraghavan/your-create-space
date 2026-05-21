@@ -993,24 +993,6 @@ function Header({ onHome }) {
 
       <nav style={{ display: "flex", alignItems: "center", gap: 24 }} className="ns-nav-links" />
 
-      <a
-        href="mailto:hello@netscribes.com"
-        style={{
-        padding: "10px 20px",
-        borderRadius: 2,
-        background: NS.blue,
-        border: "none",
-        color: "#FFFFFF",
-        fontWeight: 600, fontSize: 13,
-        cursor: "pointer",
-        fontFamily: "'DM Sans', sans-serif",
-        letterSpacing: "0.01em",
-        textDecoration: "none",
-        transition: "background 0.18s",
-      }}
-      onMouseEnter={e => e.currentTarget.style.background = NS.blueDeep}
-      onMouseLeave={e => e.currentTarget.style.background = NS.blue}
-      >Request Samples →</a>
     </header>
   );
 }
@@ -1900,30 +1882,17 @@ function FooterCTA({ onTalkStrategist }) {
           </p>
         </div>
         <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
-          <a
-            href="mailto:hello@netscribes.com"
+          <button
+            onClick={onTalkStrategist}
             style={{
             padding: "14px 24px",
             borderRadius: 2,
             background: NS.red,
             border: "none",
-            color: "#FFFFFF",
-            fontWeight: 600, fontSize: 14,
-            cursor: "pointer",
-            fontFamily: "'DM Sans', sans-serif",
-            letterSpacing: "0.01em",
-            textDecoration: "none",
-          }}>Request samples →</a>
-          <button
-            onClick={onTalkStrategist}
-            style={{
-            padding: "14px 22px",
-            borderRadius: 2,
-            background: "transparent",
-            border: "1px solid rgba(255,255,255,0.35)",
             color: "#FFFFFF", fontSize: 14, cursor: "pointer",
             fontFamily: "'DM Sans', sans-serif",
-            fontWeight: 500,
+            fontWeight: 600,
+            letterSpacing: "0.01em",
           }}>Talk to a strategist</button>
         </div>
       </div>
