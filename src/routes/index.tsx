@@ -1604,7 +1604,7 @@ function FormatCard({ format, category, accent, onClick, disabled }) {
           fontSize: 14, lineHeight: 1.3,
           color: NS.ink,
           letterSpacing: "-0.005em",
-        }}>{format === "TL Blog" ? "blogs" : format}</h4>
+        }}>{format === "TL Blog" ? "Blogs" : format}</h4>
         <p style={{
           marginTop: 4,
           fontSize: 11,
