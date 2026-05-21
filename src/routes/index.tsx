@@ -1591,7 +1591,15 @@ function SampleModal({ payload, onClose }) {
         animation: "ns-pop .35s cubic-bezier(0.22,1,0.36,1)",
         boxShadow: "0 30px 80px rgba(15,27,39,0.18)",
       }}>
-        <div style={{ padding: 14, position: "relative", flexShrink: 0, background: NS.paper, borderBottom: `1px solid ${NS.rule}` }}>
+        <div style={{
+          position: "relative",
+          width: "100%",
+          aspectRatio: "4/3",
+          background: NS.paperDeep,
+          borderBottom: `1px solid ${NS.rule}`,
+          flexShrink: 0,
+          overflow: "hidden",
+        }}>
           <button onClick={onClose} aria-label="Close" style={{
             position: "absolute", top: 14, right: 14, zIndex: 2,
             background: NS.surface, border: `1px solid ${NS.rule}`,
@@ -1599,9 +1607,23 @@ function SampleModal({ payload, onClose }) {
             width: 30, height: 30, fontSize: 16,
             display: "flex", alignItems: "center", justifyContent: "center",
           }}>×</button>
-          <div style={{ maxWidth: 280, margin: "0 auto" }}>
-            <FormatMock type={format} accent={accent}/>
-          </div>
+          {data.driveEmbedUrl ? (
+            <iframe
+              src={data.driveEmbedUrl}
+              title={data.title}
+              style={{ width: "100%", height: "100%", border: "none", display: "block" }}
+              allow="autoplay"
+              sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
+            />
+          ) : (
+            <div style={{
+              width: "100%", height: "100%",
+              display: "flex", alignItems: "center", justifyContent: "center",
+              padding: 24,
+            }}>
+              <FormatMock type={format} accent={accent}/>
+            </div>
+          )}
         </div>
         <div style={{ padding: "20px 24px 24px", overflow: "auto", flexShrink: 1 }}>
           <div style={{ display: "flex", gap: 8, marginBottom: 14, flexWrap: "wrap", alignItems: "center" }}>
