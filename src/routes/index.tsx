@@ -2041,10 +2041,23 @@ function NetscribesShowcase() {
         }}>© NETSCRIBES</span>
       </div>
 
-      {modalPayload && (
-        <SampleModal
-          payload={modalPayload}
-          onClose={() => setModalPayload(null)}
+      {pickerPayload && !viewerPayload && (
+        <SamplePicker
+          payload={pickerPayload}
+          onClose={() => setPickerPayload(null)}
+          onPick={(sample) => setViewerPayload({ ...pickerPayload, sample })}
+        />
+      )}
+
+      {viewerPayload && (
+        <SampleViewer
+          payload={viewerPayload}
+          onClose={() => { setViewerPayload(null); setPickerPayload(null); }}
+          onBack={(() => {
+            const { format, category } = viewerPayload;
+            const list = (CURATED[category] && CURATED[category][format]) || [];
+            return list.length > 1 ? () => setViewerPayload(null) : null;
+          })()}
         />
       )}
 
