@@ -1870,12 +1870,7 @@ function NetscribesShowcase() {
         <SampleModal
           payload={modalPayload}
           onClose={() => setModalPayload(null)}
-          onRequestSample={ctx => openRequest(ctx)}
         />
-      )}
-
-      {requestCtx && (
-        <RequestSampleModal context={requestCtx} onClose={() => setRequestCtx(null)}/>
       )}
 
       {strategistOpen && (
