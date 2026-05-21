@@ -12,6 +12,18 @@ import thumbDesignReport from "@/assets/thumbnails/design/Report design.jpg";
 import thumbDesignEvent from "@/assets/thumbnails/design/Event based assets.jpg";
 import thumbDesignEbooks from "@/assets/thumbnails/design/ebooks.jpg";
 import thumbDesignPrint from "@/assets/thumbnails/design/Print publications.jpg";
+import thumbVideoMotion from "@/assets/thumbnails/video/Motion graphics.jpg";
+import thumbVideoFootage from "@/assets/thumbnails/video/Footage-Image based.jpg";
+import thumbVideoReels from "@/assets/thumbnails/video/Reels and shorts.jpg";
+import thumbVideoPodcast from "@/assets/thumbnails/video/Podcast.jpg";
+import thumbVideoTraining from "@/assets/thumbnails/video/Training videos.jpg";
+import thumbVideoWhiteboard from "@/assets/thumbnails/video/Whiteboard animation.jpg";
+import thumbSocialStatic from "@/assets/thumbnails/social/Static post.jpg";
+import thumbSocialCarousel from "@/assets/thumbnails/social/Carousel.jpg";
+import thumbSocialGifs from "@/assets/thumbnails/social/GIFs.jpg";
+import thumbSocialTeaser from "@/assets/thumbnails/social/Teaser.jpg";
+import thumbSocialMemes from "@/assets/thumbnails/social/Memes.jpg";
+import thumbSocialComics from "@/assets/thumbnails/social/Corporate comics.jpg";
 
 const THUMBNAILS: Record<string, Record<string, string>> = {
   content: {
@@ -27,6 +39,24 @@ const THUMBNAILS: Record<string, Record<string, string>> = {
     "Event Based Assets": thumbDesignEvent,
     "eBooks": thumbDesignEbooks,
     "Print Publications": thumbDesignPrint,
+  },
+  videos: {
+    "Motion Graphics": thumbVideoMotion,
+    "Motion Graphics with Character Animation": thumbVideoMotion,
+    "Footage / Image Based": thumbVideoFootage,
+    "Reels and Shorts": thumbVideoReels,
+    "Podcast Interviews": thumbVideoPodcast,
+    "Podcast / Thought Leadership Interviews": thumbVideoPodcast,
+    "Training Videos": thumbVideoTraining,
+    "Whiteboard Animation": thumbVideoWhiteboard,
+  },
+  social: {
+    "Static Post Design": thumbSocialStatic,
+    "Carousel": thumbSocialCarousel,
+    "GIFs": thumbSocialGifs,
+    "Teasers": thumbSocialTeaser,
+    "Memes": thumbSocialMemes,
+    "Corporate Comics": thumbSocialComics,
   },
 };
 
