@@ -1485,10 +1485,15 @@ function FormatGrid({ formats, category, accent, industry, onPreview, mobile }) 
       gridTemplateColumns: mobile ? "repeat(2, 1fr)" : "repeat(4, 1fr)",
       gap: mobile ? 12 : 16,
     }}>
-      {formats.map(fmt => (
-        <FormatCard key={fmt} format={fmt} category={category} accent={accent}
-          onClick={() => onPreview({ format: fmt, category, industry })}/>
-      ))}
+      {formats.map(fmt => {
+        const list = (CURATED[category] && CURATED[category][fmt]) || [];
+        const disabled = !!industry && !list.some(s => s.industry === industry);
+        return (
+          <FormatCard key={fmt} format={fmt} category={category} accent={accent}
+            disabled={disabled}
+            onClick={() => !disabled && onPreview({ format: fmt, category, industry })}/>
+        );
+      })}
     </div>
   );
 }
