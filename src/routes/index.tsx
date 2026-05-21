@@ -1591,7 +1591,7 @@ function FormatCard({ format, category, accent, onClick, disabled }) {
               background: "rgba(255,255,255,0.92)",
               border: `1px solid ${accent}40`,
               backdropFilter: "blur(8px)",
-            }}>{format === "TL Blog" ? "blogs" : format}</div>
+            }}>{format === "TL Blog" ? "Blogs" : format}</div>
           </div>
         ) : (
           <FormatMock type={format} accent={accent}/>
