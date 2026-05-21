@@ -1457,15 +1457,20 @@ function ParentCard({ sub, accent, industry, onPreview, open, onToggle, mobile }
             gridTemplateColumns: mobile ? "repeat(2, 1fr)" : "repeat(3, 1fr)",
             gap: mobile ? 12 : 16,
           }}>
-            {sub.formats.map(fmt => (
-              <FormatCard
-                key={fmt}
-                format={fmt}
-                category="content"
-                accent={accent}
-                onClick={() => onPreview({ format: fmt, category: "content", industry, parent: sub.name })}
-              />
-            ))}
+            {sub.formats.map(fmt => {
+              const list = CURATED.content[fmt] || [];
+              const disabled = !!industry && !list.some(s => s.industry === industry);
+              return (
+                <FormatCard
+                  key={fmt}
+                  format={fmt}
+                  category="content"
+                  accent={accent}
+                  disabled={disabled}
+                  onClick={() => !disabled && onPreview({ format: fmt, category: "content", industry, parent: sub.name })}
+                />
+              );
+            })}
           </div>
         </div>
       )}
