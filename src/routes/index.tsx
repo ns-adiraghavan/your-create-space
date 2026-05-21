@@ -969,7 +969,7 @@ function StrategistModal({ onClose }) {
 
 // ─── Header ───────────────────────────────────────────────────────
 
-function Header({ onHome, onRequestSample }) {
+function Header({ onHome }) {
   return (
     <header style={{
       padding: "18px clamp(20px, 4vw, 44px)",
