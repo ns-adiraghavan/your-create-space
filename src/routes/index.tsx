@@ -1813,7 +1813,6 @@ function NetscribesShowcase() {
 
       <Header
         onHome={() => { setSelected(null); setIndustry(null); }}
-        onRequestSample={() => openRequest()}
       />
 
       <main>
