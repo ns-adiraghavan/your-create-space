@@ -1666,30 +1666,34 @@ function SampleModal({ payload, onClose }) {
               letterSpacing: "0.18em", textTransform: "uppercase", fontWeight: 700,
             }}>{data.pages} pages</p>
           )}
-          <div style={{ display: "flex", gap: 8 }}>
-            <button
-              onClick={() => onRequestSample?.({ title: data.title, format })}
-              style={{
-              flex: 1,
-              padding: "12px 0",
-              borderRadius: 2,
-              background: NS.blue,
-              border: "none",
-              color: "#FFFFFF",
-              fontWeight: 600, fontSize: 13,
-              cursor: "pointer",
-              fontFamily: "'DM Sans', sans-serif",
-              letterSpacing: "0.01em",
-            }}>Request this sample</button>
-            <button style={{
-              padding: "12px 18px",
-              borderRadius: 2,
-              background: NS.surface,
-              border: `1px solid ${NS.rule}`,
-              color: NS.ink, fontSize: 13, cursor: "pointer",
-              fontFamily: "'DM Sans', sans-serif",
-              fontWeight: 500,
-            }}>Share</button>
+          <div style={{ display: "flex", gap: 8, marginTop: 18 }}>
+            {data.driveViewUrl && (
+              <a
+                href={data.driveViewUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  flex: 1,
+                  padding: "12px 0",
+                  borderRadius: 2,
+                  background: NS.blue,
+                  border: "none",
+                  color: "#FFFFFF",
+                  fontWeight: 600,
+                  fontSize: 13,
+                  cursor: "pointer",
+                  fontFamily: "'DM Sans', sans-serif",
+                  letterSpacing: "0.01em",
+                  textDecoration: "none",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: 6,
+                }}
+              >
+                Open in Drive ↗
+              </a>
+            )}
           </div>
         </div>
       </div>
