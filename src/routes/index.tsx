@@ -1381,10 +1381,36 @@ function FilterRow({ industry, setIndustry, accent, mobile }) {
 // ─── Detail panels per category ──────────────────────────────────
 
 function ContentDetail({ accent, industry, onPreview, mobile }) {
-  const [openId, setOpenId] = useState(CONTENT_SUBS[0]?.id ?? null);
+  const visibleSubs = CONTENT_SUBS
+    .map(sub => {
+      const formats = sub.formats.filter(fmt => {
+        if (!industry) return true;
+        const list = CURATED.content[fmt] || [];
+        return list.some(s => s.industry === industry);
+      });
+      return { ...sub, formats };
+    })
+    .filter(sub => sub.formats.length > 0);
+
+  const [openId, setOpenId] = useState(visibleSubs[0]?.id ?? null);
+  useEffect(() => {
+    if (!visibleSubs.find(s => s.id === openId)) {
+      setOpenId(visibleSubs[0]?.id ?? null);
+    }
+  }, [industry]);
+
+  if (visibleSubs.length === 0) {
+    const indLabel = INDUSTRIES.find(i => i.id === industry)?.label;
+    return (
+      <p style={{ textAlign: "center", color: NS.muted, fontSize: 13, padding: "40px 0", fontFamily: "'DM Sans', sans-serif" }}>
+        No Content samples for {indLabel} yet.
+      </p>
+    );
+  }
+
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: mobile ? 14 : 18 }}>
-      {CONTENT_SUBS.map(sub => (
+      {visibleSubs.map(sub => (
         <ParentCard
           key={sub.id}
           sub={sub}
