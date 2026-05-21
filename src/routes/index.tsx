@@ -1846,7 +1846,6 @@ function NetscribesShowcase() {
       </main>
 
       <FooterCTA
-        onRequestSample={() => openRequest()}
         onTalkStrategist={() => setStrategistOpen(true)}
       />
 
