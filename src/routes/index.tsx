@@ -1973,7 +1973,7 @@ function NetscribesShowcase() {
       selected === "videos" ? VIDEO_FORMATS :
                               SOCIAL_FORMATS;
     return <FormatGrid formats={formats} category={selected} accent={cat.color}
-      industry={industry} onPreview={setModalPayload} mobile={mobile}/>;
+      industry={industry} onPreview={handlePreview} mobile={mobile}/>;
   })();
 
   return (
