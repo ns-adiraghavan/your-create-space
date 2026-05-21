@@ -2,6 +2,23 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState, useEffect, useRef } from "react";
 import logoSrc from "@/assets/netscribes-logo.png";
+import thumbTLWhitepaper from "@/assets/thumbnails/content/thought_leadership/Whitepaper.jpg";
+import thumbTLPOV from "@/assets/thumbnails/content/thought_leadership/POV.jpg";
+import thumbTLBlog from "@/assets/thumbnails/content/thought_leadership/TL_Blog.jpg";
+import thumbTLEbook from "@/assets/thumbnails/content/thought_leadership/ebook.jpg";
+
+const THUMBNAILS: Record<string, Record<string, string>> = {
+  content: {
+    "Whitepaper": thumbTLWhitepaper,
+    "POV": thumbTLPOV,
+    "TL Blog": thumbTLBlog,
+    "eBook": thumbTLEbook,
+  },
+};
+
+function getThumbnail(category, format) {
+  return THUMBNAILS[category]?.[format];
+}
 
 export const Route = createFileRoute("/")({
   component: NetscribesShowcase,
@@ -261,9 +278,9 @@ function WhitepaperMock({ accent }) {
   );
 }
 
-function POVMock({ accent }) {
+function POVMock({ accent, label = "POV" }) {
   return (
-    <FrameBase accent={accent} label="POV">
+    <FrameBase accent={accent} label={label}>
       <text x="18" y="34" fill="#0F1B27" fontFamily="'DM Sans', sans-serif" fontSize="14"  opacity="0.95">"</text>
       <rect x="18" y="38" width="120" height="3" fill="#0F1B27" opacity="0.85"/>
       <rect x="18" y="44" width="160" height="3" fill="#0F1B27" opacity="0.85"/>
@@ -762,7 +779,7 @@ function GenericMock({ accent, label = "Sample" }) {
 const MOCK_BY_TYPE = {
   "Whitepaper": WhitepaperMock,
   "POV": POVMock,
-  "TL Blog": POVMock, "TL Blogs": POVMock, "Blog": POVMock,
+  "TL Blog": (p) => <POVMock {...p} label="TL blog"/>, "TL Blogs": (p) => <POVMock {...p} label="TL blog"/>, "Blog": (p) => <POVMock {...p} label="TL blog"/>,
   "Report": WhitepaperMock, "Reports": WhitepaperMock, "Report Design": PrintMock,
   "eBook": EbookMock, "eBooks": EbookMock,
   "Case Study": CaseMock,
@@ -1543,7 +1560,28 @@ function FormatCard({ format, category, accent, onClick, disabled }) {
       }}
     >
       <div style={{ padding: 10, background: NS.paper, borderBottom: `1px solid ${NS.ruleSoft}` }}>
-        <FormatMock type={format} accent={accent}/>
+        {getThumbnail(category, format) ? (
+          <div style={{
+            position: "relative", width: "100%", aspectRatio: "4/3",
+            borderRadius: 14, overflow: "hidden",
+            border: `1px solid ${accent}24`,
+          }}>
+            <img src={getThumbnail(category, format)} alt={format}
+              style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}/>
+            <div style={{
+              position: "absolute", left: 10, bottom: 10,
+              fontFamily: "'DM Sans', sans-serif",
+              fontSize: 9, fontWeight: 600, letterSpacing: "0.14em",
+              textTransform: "uppercase", color: accent,
+              padding: "3px 8px", borderRadius: 100,
+              background: "rgba(255,255,255,0.92)",
+              border: `1px solid ${accent}40`,
+              backdropFilter: "blur(8px)",
+            }}>{format === "TL Blog" ? "TL blog" : format}</div>
+          </div>
+        ) : (
+          <FormatMock type={format} accent={accent}/>
+        )}
       </div>
       <div style={{ padding: "14px 16px 18px" }}>
         <h4 style={{
