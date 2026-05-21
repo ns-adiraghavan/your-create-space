@@ -1503,21 +1503,23 @@ function FormatCard({ format, category, accent, onClick, disabled }) {
   return (
     <button
       onClick={onClick}
-      onMouseEnter={() => setHov(true)}
+      disabled={disabled}
+      onMouseEnter={() => !disabled && setHov(true)}
       onMouseLeave={() => setHov(false)}
       style={{
         textAlign: "left",
         background: NS.surface,
-        border: `1px solid ${hov ? accent : NS.rule}`,
+        border: `1px solid ${hov && !disabled ? accent : NS.rule}`,
         padding: 0,
-        cursor: "pointer",
+        cursor: disabled ? "not-allowed" : "pointer",
+        opacity: disabled ? 0.35 : 1,
         display: "flex",
         flexDirection: "column",
         overflow: "hidden",
         fontFamily: "'DM Sans', sans-serif",
         transition: "all 0.22s, transform 0.22s",
-        transform: hov ? "translateY(-3px)" : "none",
-        boxShadow: hov ? `0 14px 32px ${accent}1F` : "0 0 0 transparent",
+        transform: hov && !disabled ? "translateY(-3px)" : "none",
+        boxShadow: hov && !disabled ? `0 14px 32px ${accent}1F` : "0 0 0 transparent",
       }}
     >
       <div style={{ padding: 10, background: NS.paper, borderBottom: `1px solid ${NS.ruleSoft}` }}>
