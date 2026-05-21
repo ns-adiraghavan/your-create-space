@@ -1549,7 +1549,7 @@ function FormatCard({ format, category, accent, onClick, disabled }) {
 
 // ─── Modal ────────────────────────────────────────────────────────
 
-function SampleModal({ payload, onClose, onRequestSample }) {
+function SampleModal({ payload, onClose }) {
   const { format, category, industry, parent } = payload;
   const samples = (CURATED[category] && CURATED[category][format]) || [];
   const data = samples.find(s => s.industry === industry) || samples[0] || {
