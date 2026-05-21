@@ -6,6 +6,12 @@ import thumbTLWhitepaper from "@/assets/thumbnails/content/thought_leadership/Wh
 import thumbTLPOV from "@/assets/thumbnails/content/thought_leadership/POV.jpg";
 import thumbTLBlog from "@/assets/thumbnails/content/thought_leadership/TL_Blog.jpg";
 import thumbTLEbook from "@/assets/thumbnails/content/thought_leadership/ebook.jpg";
+import thumbDesignInfographics from "@/assets/thumbnails/design/Infographics.jpg";
+import thumbDesignPPT from "@/assets/thumbnails/design/PPT.jpg";
+import thumbDesignReport from "@/assets/thumbnails/design/Report design.jpg";
+import thumbDesignEvent from "@/assets/thumbnails/design/Event based assets.jpg";
+import thumbDesignEbooks from "@/assets/thumbnails/design/ebooks.jpg";
+import thumbDesignPrint from "@/assets/thumbnails/design/Print publications.jpg";
 
 const THUMBNAILS: Record<string, Record<string, string>> = {
   content: {
@@ -13,6 +19,14 @@ const THUMBNAILS: Record<string, Record<string, string>> = {
     "POV": thumbTLPOV,
     "TL Blog": thumbTLBlog,
     "eBook": thumbTLEbook,
+  },
+  design: {
+    "Infographics": thumbDesignInfographics,
+    "PPT": thumbDesignPPT,
+    "Report Design": thumbDesignReport,
+    "Event Based Assets": thumbDesignEvent,
+    "eBooks": thumbDesignEbooks,
+    "Print Publications": thumbDesignPrint,
   },
 };
 
