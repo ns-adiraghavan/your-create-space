@@ -993,8 +993,8 @@ function Header({ onHome }) {
 
       <nav style={{ display: "flex", alignItems: "center", gap: 24 }} className="ns-nav-links" />
 
-      <button
-        onClick={onRequestSample}
+      <a
+        href="mailto:hello@netscribes.com"
         style={{
         padding: "10px 20px",
         borderRadius: 2,
@@ -1005,11 +1005,12 @@ function Header({ onHome }) {
         cursor: "pointer",
         fontFamily: "'DM Sans', sans-serif",
         letterSpacing: "0.01em",
+        textDecoration: "none",
         transition: "background 0.18s",
       }}
       onMouseEnter={e => e.currentTarget.style.background = NS.blueDeep}
       onMouseLeave={e => e.currentTarget.style.background = NS.blue}
-      >Request Samples →</button>
+      >Request Samples →</a>
     </header>
   );
 }
