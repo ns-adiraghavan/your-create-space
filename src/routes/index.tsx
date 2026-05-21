@@ -1778,10 +1778,8 @@ function NetscribesShowcase() {
   const [selected, setSelected] = useState(null);
   const [industry, setIndustry] = useState(null);
   const [modalPayload, setModalPayload] = useState(null);
-  const [requestCtx, setRequestCtx] = useState(null); // null = closed; {} or {title,format} = open
   const [strategistOpen, setStrategistOpen] = useState(false);
   const mobile = useMedia("(max-width: 720px)");
-  const openRequest = (ctx = {}) => setRequestCtx(ctx);
 
   const handleSelect = id => {
     setSelected(prev => prev === id ? null : id);
