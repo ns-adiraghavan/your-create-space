@@ -947,45 +947,6 @@ function LeadModal({ title, eyebrow, blurb, fields, submitLabel, accent = NS.blu
   );
 }
 
-function RequestSampleModal({ context, onClose }) {
-  const handleSubmit = values => {
-    // Simulate download — generate a small text file based on context
-    const title = context?.title || "Netscribes Sample";
-    const body =
-`NETSCRIBES — SAMPLE REQUEST
-
-Sample: ${title}
-${context?.format ? `Format: ${context.format}\n` : ""}
-Requested by: ${values.name} (${values.company})
-Email: ${values.email}
-
-Thank you for requesting a sample. A high-resolution copy will follow by email.
-`;
-    const blob = new Blob([body], { type: "text/plain" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = `netscribes-${(context?.format || "sample").toLowerCase().replace(/[^a-z0-9]+/g, "-")}.txt`;
-    document.body.appendChild(a); a.click(); a.remove();
-    URL.revokeObjectURL(url);
-  };
-  return (
-    <LeadModal
-      eyebrow="Request sample"
-      title={context?.title ? `Download "${context.title}"` : "Get a sample pack"}
-      blurb="Tell us where to send it — we'll deliver the file straight to your inbox and start the download now."
-      submitLabel="Download sample →"
-      accent={NS.blue}
-      fields={[
-        { name: "name",    label: "Full name", required: true },
-        { name: "company", label: "Company",   required: true },
-        { name: "email",   label: "Work email", type: "email", required: true },
-      ]}
-      onClose={onClose}
-      onSubmit={handleSubmit}
-    />
-  );
-}
 
 function StrategistModal({ onClose }) {
   return (
@@ -1008,7 +969,7 @@ function StrategistModal({ onClose }) {
 
 // ─── Header ───────────────────────────────────────────────────────
 
-function Header({ onHome, onRequestSample }) {
+function Header({ onHome }) {
   return (
     <header style={{
       padding: "18px clamp(20px, 4vw, 44px)",
@@ -1032,8 +993,8 @@ function Header({ onHome, onRequestSample }) {
 
       <nav style={{ display: "flex", alignItems: "center", gap: 24 }} className="ns-nav-links" />
 
-      <button
-        onClick={onRequestSample}
+      <a
+        href="mailto:hello@netscribes.com"
         style={{
         padding: "10px 20px",
         borderRadius: 2,
@@ -1044,11 +1005,12 @@ function Header({ onHome, onRequestSample }) {
         cursor: "pointer",
         fontFamily: "'DM Sans', sans-serif",
         letterSpacing: "0.01em",
+        textDecoration: "none",
         transition: "background 0.18s",
       }}
       onMouseEnter={e => e.currentTarget.style.background = NS.blueDeep}
       onMouseLeave={e => e.currentTarget.style.background = NS.blue}
-      >Request Samples →</button>
+      >Request Samples →</a>
     </header>
   );
 }
@@ -1495,15 +1457,20 @@ function ParentCard({ sub, accent, industry, onPreview, open, onToggle, mobile }
             gridTemplateColumns: mobile ? "repeat(2, 1fr)" : "repeat(3, 1fr)",
             gap: mobile ? 12 : 16,
           }}>
-            {sub.formats.map(fmt => (
-              <FormatCard
-                key={fmt}
-                format={fmt}
-                category="content"
-                accent={accent}
-                onClick={() => onPreview({ format: fmt, category: "content", industry, parent: sub.name })}
-              />
-            ))}
+            {sub.formats.map(fmt => {
+              const list = CURATED.content[fmt] || [];
+              const disabled = !!industry && !list.some(s => s.industry === industry);
+              return (
+                <FormatCard
+                  key={fmt}
+                  format={fmt}
+                  category="content"
+                  accent={accent}
+                  disabled={disabled}
+                  onClick={() => !disabled && onPreview({ format: fmt, category: "content", industry, parent: sub.name })}
+                />
+              );
+            })}
           </div>
         </div>
       )}
@@ -1518,34 +1485,41 @@ function FormatGrid({ formats, category, accent, industry, onPreview, mobile }) 
       gridTemplateColumns: mobile ? "repeat(2, 1fr)" : "repeat(4, 1fr)",
       gap: mobile ? 12 : 16,
     }}>
-      {formats.map(fmt => (
-        <FormatCard key={fmt} format={fmt} category={category} accent={accent}
-          onClick={() => onPreview({ format: fmt, category, industry })}/>
-      ))}
+      {formats.map(fmt => {
+        const list = (CURATED[category] && CURATED[category][fmt]) || [];
+        const disabled = !!industry && !list.some(s => s.industry === industry);
+        return (
+          <FormatCard key={fmt} format={fmt} category={category} accent={accent}
+            disabled={disabled}
+            onClick={() => !disabled && onPreview({ format: fmt, category, industry })}/>
+        );
+      })}
     </div>
   );
 }
 
-function FormatCard({ format, category, accent, onClick }) {
+function FormatCard({ format, category, accent, onClick, disabled }) {
   const [hov, setHov] = useState(false);
   return (
     <button
       onClick={onClick}
-      onMouseEnter={() => setHov(true)}
+      disabled={disabled}
+      onMouseEnter={() => !disabled && setHov(true)}
       onMouseLeave={() => setHov(false)}
       style={{
         textAlign: "left",
         background: NS.surface,
-        border: `1px solid ${hov ? accent : NS.rule}`,
+        border: `1px solid ${hov && !disabled ? accent : NS.rule}`,
         padding: 0,
-        cursor: "pointer",
+        cursor: disabled ? "not-allowed" : "pointer",
+        opacity: disabled ? 0.35 : 1,
         display: "flex",
         flexDirection: "column",
         overflow: "hidden",
         fontFamily: "'DM Sans', sans-serif",
         transition: "all 0.22s, transform 0.22s",
-        transform: hov ? "translateY(-3px)" : "none",
-        boxShadow: hov ? `0 14px 32px ${accent}1F` : "0 0 0 transparent",
+        transform: hov && !disabled ? "translateY(-3px)" : "none",
+        boxShadow: hov && !disabled ? `0 14px 32px ${accent}1F` : "0 0 0 transparent",
       }}
     >
       <div style={{ padding: 10, background: NS.paper, borderBottom: `1px solid ${NS.ruleSoft}` }}>
@@ -1575,7 +1549,7 @@ function FormatCard({ format, category, accent, onClick }) {
 
 // ─── Modal ────────────────────────────────────────────────────────
 
-function SampleModal({ payload, onClose, onRequestSample }) {
+function SampleModal({ payload, onClose }) {
   const { format, category, industry, parent } = payload;
   const samples = (CURATED[category] && CURATED[category][format]) || [];
   const data = samples.find(s => s.industry === industry) || samples[0] || {
@@ -1617,7 +1591,15 @@ function SampleModal({ payload, onClose, onRequestSample }) {
         animation: "ns-pop .35s cubic-bezier(0.22,1,0.36,1)",
         boxShadow: "0 30px 80px rgba(15,27,39,0.18)",
       }}>
-        <div style={{ padding: 14, position: "relative", flexShrink: 0, background: NS.paper, borderBottom: `1px solid ${NS.rule}` }}>
+        <div style={{
+          position: "relative",
+          width: "100%",
+          aspectRatio: "4/3",
+          background: NS.paperDeep,
+          borderBottom: `1px solid ${NS.rule}`,
+          flexShrink: 0,
+          overflow: "hidden",
+        }}>
           <button onClick={onClose} aria-label="Close" style={{
             position: "absolute", top: 14, right: 14, zIndex: 2,
             background: NS.surface, border: `1px solid ${NS.rule}`,
@@ -1625,9 +1607,23 @@ function SampleModal({ payload, onClose, onRequestSample }) {
             width: 30, height: 30, fontSize: 16,
             display: "flex", alignItems: "center", justifyContent: "center",
           }}>×</button>
-          <div style={{ maxWidth: 280, margin: "0 auto" }}>
-            <FormatMock type={format} accent={accent}/>
-          </div>
+          {data.driveEmbedUrl ? (
+            <iframe
+              src={data.driveEmbedUrl}
+              title={data.title}
+              style={{ width: "100%", height: "100%", border: "none", display: "block" }}
+              allow="autoplay"
+              sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
+            />
+          ) : (
+            <div style={{
+              width: "100%", height: "100%",
+              display: "flex", alignItems: "center", justifyContent: "center",
+              padding: 24,
+            }}>
+              <FormatMock type={format} accent={accent}/>
+            </div>
+          )}
         </div>
         <div style={{ padding: "20px 24px 24px", overflow: "auto", flexShrink: 1 }}>
           <div style={{ display: "flex", gap: 8, marginBottom: 14, flexWrap: "wrap", alignItems: "center" }}>
@@ -1670,30 +1666,34 @@ function SampleModal({ payload, onClose, onRequestSample }) {
               letterSpacing: "0.18em", textTransform: "uppercase", fontWeight: 700,
             }}>{data.pages} pages</p>
           )}
-          <div style={{ display: "flex", gap: 8 }}>
-            <button
-              onClick={() => onRequestSample?.({ title: data.title, format })}
-              style={{
-              flex: 1,
-              padding: "12px 0",
-              borderRadius: 2,
-              background: NS.blue,
-              border: "none",
-              color: "#FFFFFF",
-              fontWeight: 600, fontSize: 13,
-              cursor: "pointer",
-              fontFamily: "'DM Sans', sans-serif",
-              letterSpacing: "0.01em",
-            }}>Request this sample</button>
-            <button style={{
-              padding: "12px 18px",
-              borderRadius: 2,
-              background: NS.surface,
-              border: `1px solid ${NS.rule}`,
-              color: NS.ink, fontSize: 13, cursor: "pointer",
-              fontFamily: "'DM Sans', sans-serif",
-              fontWeight: 500,
-            }}>Share</button>
+          <div style={{ display: "flex", gap: 8, marginTop: 18 }}>
+            {data.driveViewUrl && (
+              <a
+                href={data.driveViewUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  flex: 1,
+                  padding: "12px 0",
+                  borderRadius: 2,
+                  background: NS.blue,
+                  border: "none",
+                  color: "#FFFFFF",
+                  fontWeight: 600,
+                  fontSize: 13,
+                  cursor: "pointer",
+                  fontFamily: "'DM Sans', sans-serif",
+                  letterSpacing: "0.01em",
+                  textDecoration: "none",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: 6,
+                }}
+              >
+                Open in Drive ↗
+              </a>
+            )}
           </div>
         </div>
       </div>
@@ -1703,7 +1703,7 @@ function SampleModal({ payload, onClose, onRequestSample }) {
 
 // ─── Footer CTA ───────────────────────────────────────────────────
 
-function FooterCTA({ onRequestSample, onTalkStrategist }) {
+function FooterCTA({ onTalkStrategist }) {
   return (
     <section style={{
       maxWidth: 1160,
@@ -1741,8 +1741,8 @@ function FooterCTA({ onRequestSample, onTalkStrategist }) {
           </p>
         </div>
         <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
-          <button
-            onClick={onRequestSample}
+          <a
+            href="mailto:hello@netscribes.com"
             style={{
             padding: "14px 24px",
             borderRadius: 2,
@@ -1753,7 +1753,8 @@ function FooterCTA({ onRequestSample, onTalkStrategist }) {
             cursor: "pointer",
             fontFamily: "'DM Sans', sans-serif",
             letterSpacing: "0.01em",
-          }}>Request samples →</button>
+            textDecoration: "none",
+          }}>Request samples →</a>
           <button
             onClick={onTalkStrategist}
             style={{
@@ -1777,10 +1778,8 @@ function NetscribesShowcase() {
   const [selected, setSelected] = useState(null);
   const [industry, setIndustry] = useState(null);
   const [modalPayload, setModalPayload] = useState(null);
-  const [requestCtx, setRequestCtx] = useState(null); // null = closed; {} or {title,format} = open
   const [strategistOpen, setStrategistOpen] = useState(false);
   const mobile = useMedia("(max-width: 720px)");
-  const openRequest = (ctx = {}) => setRequestCtx(ctx);
 
   const handleSelect = id => {
     setSelected(prev => prev === id ? null : id);
@@ -1814,7 +1813,6 @@ function NetscribesShowcase() {
 
       <Header
         onHome={() => { setSelected(null); setIndustry(null); }}
-        onRequestSample={() => openRequest()}
       />
 
       <main>
@@ -1848,7 +1846,6 @@ function NetscribesShowcase() {
       </main>
 
       <FooterCTA
-        onRequestSample={() => openRequest()}
         onTalkStrategist={() => setStrategistOpen(true)}
       />
 
@@ -1873,12 +1870,7 @@ function NetscribesShowcase() {
         <SampleModal
           payload={modalPayload}
           onClose={() => setModalPayload(null)}
-          onRequestSample={ctx => openRequest(ctx)}
         />
-      )}
-
-      {requestCtx && (
-        <RequestSampleModal context={requestCtx} onClose={() => setRequestCtx(null)}/>
       )}
 
       {strategistOpen && (
