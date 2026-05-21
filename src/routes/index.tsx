@@ -1741,8 +1741,8 @@ function FooterCTA({ onTalkStrategist }) {
           </p>
         </div>
         <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
-          <button
-            onClick={onRequestSample}
+          <a
+            href="mailto:hello@netscribes.com"
             style={{
             padding: "14px 24px",
             borderRadius: 2,
@@ -1753,7 +1753,8 @@ function FooterCTA({ onTalkStrategist }) {
             cursor: "pointer",
             fontFamily: "'DM Sans', sans-serif",
             letterSpacing: "0.01em",
-          }}>Request samples →</button>
+            textDecoration: "none",
+          }}>Request samples →</a>
           <button
             onClick={onTalkStrategist}
             style={{
