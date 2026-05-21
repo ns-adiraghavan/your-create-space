@@ -1967,7 +1967,7 @@ function NetscribesShowcase() {
   const detail = selected && (() => {
     const cat = CAT_BY_ID[selected];
     if (selected === "content")
-      return <ContentDetail accent={cat.color} industry={industry} onPreview={setModalPayload} mobile={mobile}/>;
+      return <ContentDetail accent={cat.color} industry={industry} onPreview={handlePreview} mobile={mobile}/>;
     const formats =
       selected === "design" ? DESIGN_FORMATS :
       selected === "videos" ? VIDEO_FORMATS :
