@@ -1498,7 +1498,7 @@ function FormatGrid({ formats, category, accent, industry, onPreview, mobile }) 
   );
 }
 
-function FormatCard({ format, category, accent, onClick }) {
+function FormatCard({ format, category, accent, onClick, disabled }) {
   const [hov, setHov] = useState(false);
   return (
     <button
