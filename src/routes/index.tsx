@@ -1577,7 +1577,8 @@ function FormatCard({ format, category, accent, onClick }) {
 
 function SampleModal({ payload, onClose, onRequestSample }) {
   const { format, category, industry, parent } = payload;
-  const data = (CURATED[category] && CURATED[category][format]) || {
+  const samples = (CURATED[category] && CURATED[category][format]) || [];
+  const data = samples.find(s => s.industry === industry) || samples[0] || {
     title: `${format} Sample`,
     desc: `Sample ${format} piece showcasing Netscribes capabilities.`,
   };
