@@ -1936,7 +1936,23 @@ function FooterCTA({ onTalkStrategist }) {
 function NetscribesShowcase() {
   const [selected, setSelected] = useState(null);
   const [industry, setIndustry] = useState(null);
-  const [modalPayload, setModalPayload] = useState(null);
+  const [pickerPayload, setPickerPayload] = useState(null);
+  const [viewerPayload, setViewerPayload] = useState(null);
+
+  const handlePreview = (payload) => {
+    const { format, category } = payload;
+    const samples = (CURATED[category] && CURATED[category][format]) || [];
+    if (samples.length === 1) {
+      setViewerPayload({ ...payload, sample: samples[0] });
+    } else if (samples.length > 1) {
+      setPickerPayload(payload);
+    } else {
+      setViewerPayload({
+        ...payload,
+        sample: { title: `${format} Sample`, desc: `Sample ${format} piece showcasing Netscribes capabilities.` },
+      });
+    }
+  };
   const [strategistOpen, setStrategistOpen] = useState(false);
   const mobile = useMedia("(max-width: 720px)");
 
