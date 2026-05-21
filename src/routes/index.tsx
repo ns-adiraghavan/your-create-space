@@ -1585,18 +1585,9 @@ function FormatCard({ format, category, accent, onClick, disabled }) {
   );
 }
 
-// ─── Modal ────────────────────────────────────────────────────────
+// ─── Sample Picker + Viewer ───────────────────────────────────────
 
-function SampleModal({ payload, onClose }) {
-  const { format, category, industry, parent } = payload;
-  const samples = (CURATED[category] && CURATED[category][format]) || [];
-  const data = samples.find(s => s.industry === industry) || samples[0] || {
-    title: `${format} Sample`,
-    desc: `Sample ${format} piece showcasing Netscribes capabilities.`,
-  };
-  const accent = CAT_BY_ID[category].color;
-  const indLabel = INDUSTRIES.find(i => i.id === (industry || data.industry))?.label;
-
+function useEscClose(onClose) {
   useEffect(() => {
     const h = e => e.key === "Escape" && onClose();
     document.body.style.overflow = "hidden";
@@ -1606,6 +1597,21 @@ function SampleModal({ payload, onClose }) {
       window.removeEventListener("keydown", h);
     };
   }, [onClose]);
+}
+
+function SamplePicker({ payload, onClose, onPick }) {
+  const { format, category, industry, parent } = payload;
+  const accent = CAT_BY_ID[category].color;
+  const samples = (CURATED[category] && CURATED[category][format]) || [];
+  useEscClose(onClose);
+
+  const ordered = industry
+    ? [...samples].sort((a, b) => {
+        const am = a.industry === industry ? 0 : 1;
+        const bm = b.industry === industry ? 0 : 1;
+        return am - bm;
+      })
+    : samples;
 
   return (
     <div onClick={onClose} style={{
@@ -1619,36 +1625,137 @@ function SampleModal({ payload, onClose }) {
       overflow: "auto",
     }}>
       <div onClick={e => e.stopPropagation()} style={{
-        width: "100%", maxWidth: 480,
+        width: "100%", maxWidth: 640,
         maxHeight: "calc(100vh - 40px)",
         background: NS.surface,
         border: `1px solid ${NS.rule}`,
         borderTop: `3px solid ${accent}`,
-        overflow: "hidden",
         display: "flex", flexDirection: "column",
         animation: "ns-pop .35s cubic-bezier(0.22,1,0.36,1)",
         boxShadow: "0 30px 80px rgba(15,27,39,0.18)",
+        fontFamily: "'DM Sans', sans-serif",
       }}>
         <div style={{
-          position: "relative",
-          width: "100%",
-          aspectRatio: "4/3",
-          background: NS.paperDeep,
-          borderBottom: `1px solid ${NS.rule}`,
-          flexShrink: 0,
-          overflow: "hidden",
+          display: "flex", alignItems: "center", justifyContent: "space-between",
+          padding: "20px 24px", borderBottom: `1px solid ${NS.ruleSoft}`,
+          gap: 12,
         }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 10, flexWrap: "wrap" }}>
+            <span style={{
+              fontSize: 10, fontWeight: 700, letterSpacing: "0.18em",
+              textTransform: "uppercase", color: "#FFFFFF",
+              padding: "4px 10px", borderRadius: 2,
+              background: accent,
+            }}>{format}</span>
+            {parent && (
+              <span style={{
+                fontSize: 10, fontWeight: 600, letterSpacing: "0.14em",
+                textTransform: "uppercase", color: NS.muted,
+              }}>{parent}</span>
+            )}
+          </div>
           <button onClick={onClose} aria-label="Close" style={{
-            position: "absolute", top: 14, right: 14, zIndex: 2,
             background: NS.surface, border: `1px solid ${NS.rule}`,
             color: NS.ink, cursor: "pointer", borderRadius: "50%",
             width: 30, height: 30, fontSize: 16,
             display: "flex", alignItems: "center", justifyContent: "center",
           }}>×</button>
-          {data.driveEmbedUrl ? (
+        </div>
+        <div style={{ padding: "16px 24px 8px" }}>
+          <p style={{ color: NS.inkSoft, fontSize: 13 }}>
+            {ordered.length} samples — pick one to preview
+          </p>
+        </div>
+        <div style={{ padding: "8px 16px 20px", overflow: "auto", display: "flex", flexDirection: "column", gap: 8 }}>
+          {ordered.map((s, i) => {
+            const matches = !industry || s.industry === industry;
+            const indLabel = INDUSTRIES.find(x => x.id === s.industry)?.label;
+            return (
+              <button
+                key={i}
+                onClick={() => onPick(s)}
+                style={{
+                  display: "flex", alignItems: "center", justifyContent: "space-between",
+                  gap: 14, textAlign: "left",
+                  background: NS.surface,
+                  border: `1px solid ${NS.rule}`,
+                  padding: "14px 16px",
+                  cursor: "pointer",
+                  opacity: matches ? 1 : 0.5,
+                  fontFamily: "'DM Sans', sans-serif",
+                  transition: "border-color 0.18s, transform 0.18s",
+                }}
+                onMouseEnter={e => { e.currentTarget.style.borderColor = accent; }}
+                onMouseLeave={e => { e.currentTarget.style.borderColor = NS.rule; }}
+              >
+                <div style={{ minWidth: 0, flex: 1 }}>
+                  <p style={{
+                    fontSize: 9, fontWeight: 700, letterSpacing: "0.2em",
+                    textTransform: "uppercase", color: NS.muted, marginBottom: 6,
+                  }}>{indLabel || s.industry}</p>
+                  <p style={{
+                    fontSize: 15, fontWeight: 500, color: NS.ink, lineHeight: 1.35,
+                    letterSpacing: "-0.005em",
+                  }}>{s.title}</p>
+                </div>
+                <span style={{
+                  fontSize: 11, fontWeight: 600, color: accent,
+                  letterSpacing: "0.08em", textTransform: "uppercase",
+                  flexShrink: 0,
+                }}>Preview →</span>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function SampleViewer({ payload, onClose, onBack }) {
+  const { sample, format, category, parent } = payload;
+  const accent = CAT_BY_ID[category].color;
+  const indLabel = INDUSTRIES.find(i => i.id === sample.industry)?.label;
+  const mobile = useMedia("(max-width: 720px)");
+  useEscClose(onClose);
+
+  return (
+    <div onClick={onClose} style={{
+      position: "fixed", inset: 0, zIndex: 1000,
+      background: "rgba(15, 27, 39, 0.55)",
+      backdropFilter: "blur(8px)",
+      WebkitBackdropFilter: "blur(8px)",
+      display: "flex", alignItems: "center", justifyContent: "center",
+      padding: mobile ? 12 : 20,
+      animation: "ns-fade .25s ease",
+      overflow: "auto",
+    }}>
+      <div onClick={e => e.stopPropagation()} style={{
+        width: "100%", maxWidth: 960,
+        height: mobile ? "auto" : "86vh",
+        maxHeight: "calc(100vh - 40px)",
+        background: NS.surface,
+        border: `1px solid ${NS.rule}`,
+        borderTop: `3px solid ${accent}`,
+        display: "flex",
+        flexDirection: mobile ? "column" : "row",
+        animation: "ns-pop .35s cubic-bezier(0.22,1,0.36,1)",
+        boxShadow: "0 30px 80px rgba(15,27,39,0.18)",
+        overflow: "hidden",
+        fontFamily: "'DM Sans', sans-serif",
+      }}>
+        <div style={{
+          flex: mobile ? "none" : 1,
+          width: mobile ? "100%" : "auto",
+          height: mobile ? "55vw" : "auto",
+          background: NS.paperDeep,
+          position: "relative",
+          overflow: "hidden",
+        }}>
+          {sample.driveEmbedUrl ? (
             <iframe
-              src={data.driveEmbedUrl}
-              title={data.title}
+              src={sample.driveEmbedUrl}
+              title={sample.title}
               style={{ width: "100%", height: "100%", border: "none", display: "block" }}
               allow="autoplay"
               sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
@@ -1663,74 +1770,88 @@ function SampleModal({ payload, onClose }) {
             </div>
           )}
         </div>
-        <div style={{ padding: "20px 24px 24px", overflow: "auto", flexShrink: 1 }}>
-          <div style={{ display: "flex", gap: 8, marginBottom: 14, flexWrap: "wrap", alignItems: "center" }}>
+        <div style={{
+          width: mobile ? "100%" : 280,
+          flexShrink: 0,
+          display: "flex",
+          flexDirection: "column",
+          padding: "28px 24px",
+          background: NS.surface,
+          borderLeft: mobile ? "none" : `1px solid ${NS.rule}`,
+          borderTop: mobile ? `1px solid ${NS.rule}` : "none",
+          position: "relative",
+        }}>
+          <button onClick={onClose} aria-label="Close" style={{
+            position: "absolute", top: 14, right: 14, zIndex: 2,
+            background: NS.surface, border: `1px solid ${NS.rule}`,
+            color: NS.ink, cursor: "pointer", borderRadius: "50%",
+            width: 30, height: 30, fontSize: 16,
+            display: "flex", alignItems: "center", justifyContent: "center",
+          }}>×</button>
+          <div>
             <span style={{
+              display: "inline-block",
               fontSize: 10, fontWeight: 700, letterSpacing: "0.18em",
               textTransform: "uppercase", color: "#FFFFFF",
               padding: "4px 10px", borderRadius: 2,
               background: accent,
             }}>{format}</span>
-            {parent && (
-              <span style={{
-                fontSize: 10, fontWeight: 600, letterSpacing: "0.14em",
-                textTransform: "uppercase", color: NS.muted,
-              }}>{parent}</span>
-            )}
             {indLabel && (
-              <span style={{
+              <p style={{
                 fontSize: 10, fontWeight: 600, letterSpacing: "0.14em",
-                textTransform: "uppercase", color: NS.muted,
-                marginLeft: "auto",
-              }}>{indLabel}</span>
+                textTransform: "uppercase", color: NS.muted, marginTop: 8,
+              }}>{indLabel}</p>
+            )}
+            <h2 style={{
+              fontFamily: "'DM Sans', sans-serif",
+              fontWeight: 400,
+              fontSize: 22, lineHeight: 1.15,
+              letterSpacing: "-0.02em",
+              color: NS.ink,
+              marginTop: 16,
+            }}>{sample.title}</h2>
+            <p style={{
+              fontSize: 13, color: NS.inkSoft, lineHeight: 1.6, marginTop: 10,
+            }}>{sample.desc}</p>
+            {parent && (
+              <p style={{
+                fontSize: 10, fontWeight: 600, letterSpacing: "0.14em",
+                textTransform: "uppercase", color: NS.muted, marginTop: 12,
+              }}>{parent}</p>
             )}
           </div>
-          <h2 style={{
-            fontFamily: "'DM Sans', sans-serif",
-            fontWeight: 400,
-            fontSize: 28,
-            color: NS.ink,
-            lineHeight: 1.1,
-            letterSpacing: "-0.02em",
-            marginBottom: 10,
-          }}>{data.title}</h2>
-          <p style={{
-            color: NS.inkSoft, fontSize: 13.5, lineHeight: 1.6, marginBottom: 14,
-            fontFamily: "'DM Sans', sans-serif",
-          }}>{data.desc}</p>
-          {data.pages && (
-            <p style={{
-              fontSize: 10, color: NS.muted, marginBottom: 18,
-              letterSpacing: "0.18em", textTransform: "uppercase", fontWeight: 700,
-            }}>{data.pages} pages</p>
-          )}
-          <div style={{ display: "flex", gap: 8, marginTop: 18 }}>
-            {data.driveViewUrl && (
+          <div style={{ flex: 1 }}/>
+          <div style={{ display: "flex", flexDirection: "column", gap: 10, marginTop: 16 }}>
+            {sample.driveViewUrl && (
               <a
-                href={data.driveViewUrl}
+                href={sample.driveViewUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{
-                  flex: 1,
-                  padding: "12px 0",
-                  borderRadius: 2,
-                  background: NS.blue,
-                  border: "none",
-                  color: "#FFFFFF",
-                  fontWeight: 600,
-                  fontSize: 13,
-                  cursor: "pointer",
-                  fontFamily: "'DM Sans', sans-serif",
-                  letterSpacing: "0.01em",
-                  textDecoration: "none",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  gap: 6,
+                  width: "100%",
+                  padding: "12px 0",
+                  borderRadius: 2,
+                  background: NS.blue,
+                  color: "#FFFFFF",
+                  fontWeight: 600,
+                  fontSize: 13,
+                  textDecoration: "none",
+                  letterSpacing: "0.01em",
                 }}
               >
                 Open in Drive ↗
               </a>
+            )}
+            {onBack && (
+              <button onClick={onBack} style={{
+                background: "transparent", border: "none",
+                color: NS.muted, fontSize: 12, cursor: "pointer",
+                padding: "4px 0", textAlign: "center",
+                fontFamily: "'DM Sans', sans-serif",
+              }}>← Back to all samples</button>
             )}
           </div>
         </div>
