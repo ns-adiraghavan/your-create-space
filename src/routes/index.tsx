@@ -2042,10 +2042,12 @@ function NetscribesShowcase() {
         flexWrap: "wrap",
         gap: 12,
       }}>
-        <span style={{
-          color: NS.muted, fontSize: 11, letterSpacing: "0.18em",
-          textTransform: "uppercase", fontWeight: 600,
-        }}>© NETSCRIBES</span>
+        <span 
+          className="text-zinc-950"
+          style={{
+            color: NS.muted, fontSize: 11, letterSpacing: "0.18em",
+            textTransform: "uppercase", fontWeight: 600,
+          }}>{"\n"}</span>
       </div>
 
       {pickerPayload && !viewerPayload && (
