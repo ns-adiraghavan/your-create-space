@@ -2,73 +2,46 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState, useEffect, useRef } from "react";
 import logoSrc from "@/assets/netscribes-logo.png";
-import thumbTLWhitepaper from "@/assets/thumbnails/content/thought_leadership/Whitepaper.jpg";
-import thumbTLPOV from "@/assets/thumbnails/content/thought_leadership/POV.jpg";
-import thumbTLBlog from "@/assets/thumbnails/content/thought_leadership/TL_Blog.jpg";
-import thumbTLEbook from "@/assets/thumbnails/content/thought_leadership/ebook.jpg";
-import thumbDesignInfographics from "@/assets/thumbnails/design/Infographics.jpg";
-import thumbDesignPPT from "@/assets/thumbnails/design/PPT.jpg";
-import thumbDesignReport from "@/assets/thumbnails/design/Report design.jpg";
-import thumbDesignEvent from "@/assets/thumbnails/design/Event based assets.jpg";
-import thumbDesignEbooks from "@/assets/thumbnails/design/ebooks.jpg";
-import thumbDesignPrint from "@/assets/thumbnails/design/Print publications.jpg";
-import thumbVideoMotion from "@/assets/thumbnails/video/Motion graphics.jpg";
-import thumbVideoFootage from "@/assets/thumbnails/video/Footage-Image based.jpg";
-import thumbVideoReels from "@/assets/thumbnails/video/Reels and shorts.jpg";
-import thumbVideoPodcast from "@/assets/thumbnails/video/Podcast.jpg";
-import thumbVideoTraining from "@/assets/thumbnails/video/Training videos.jpg";
-import thumbVideoWhiteboard from "@/assets/thumbnails/video/Whiteboard animation.jpg";
-import thumbSocialStatic from "@/assets/thumbnails/social/Static post.jpg";
-import thumbSocialCarousel from "@/assets/thumbnails/social/Carousel.jpg";
-import thumbSocialGifs from "@/assets/thumbnails/social/GIFs.jpg";
-import thumbSocialTeaser from "@/assets/thumbnails/social/Teaser.jpg";
-import thumbSocialMemes from "@/assets/thumbnails/social/Memes.jpg";
-import thumbSocialComics from "@/assets/thumbnails/social/Corporate comics.jpg";
-import thumbShortCaseStudy from "@/assets/thumbnails/content/short form/Case_Study.jpg";
-import thumbShortEmailer from "@/assets/thumbnails/content/short form/Emailer.jpg";
-import thumbShortVideoScript from "@/assets/thumbnails/content/short form/Video_Script.jpg";
-import thumbShortBrochure from "@/assets/thumbnails/content/short form/brochure.jpg";
-import thumbGTMStudies from "@/assets/thumbnails/GTM/GTM.jpg";
 
 const THUMBNAILS: Record<string, Record<string, string>> = {
   content: {
-    "Whitepaper": thumbTLWhitepaper,
-    "POV": thumbTLPOV,
-    "TL Blog": thumbTLBlog,
-    "eBook": thumbTLEbook,
-    "Case Study": thumbShortCaseStudy,
-    "Emailer": thumbShortEmailer,
-    "Video Script": thumbShortVideoScript,
-    "Brochure": thumbShortBrochure,
+    "Whitepaper": "/thumbnails/content/thought_leadership/Whitepaper.jpg",
+    "POV": "/thumbnails/content/thought_leadership/POV.jpg",
+    "TL Blog": "/thumbnails/content/thought_leadership/TL_Blog.jpg",
+    "eBook": "/thumbnails/content/thought_leadership/ebook.jpg",
+    "Case Study": "/thumbnails/content/short form/Case_Study.jpg",
+    "Emailer": "/thumbnails/content/short form/Emailer.jpg",
+    "Video Script": "/thumbnails/content/short form/Video_Script.jpg",
+    "Brochure": "/thumbnails/content/short form/brochure.jpg",
   },
   gtm: {
-    "GTM Studies": thumbGTMStudies,
+    "GTM Studies": "/thumbnails/GTM/GTM.jpg",
   },
   design: {
-    "Infographics": thumbDesignInfographics,
-    "PPT": thumbDesignPPT,
-    "Report Design": thumbDesignReport,
-    "Event Based Assets": thumbDesignEvent,
-    "eBooks": thumbDesignEbooks,
-    "Print Publications": thumbDesignPrint,
+    "Infographics": "/thumbnails/design/Infographics.jpg",
+    "PPT": "/thumbnails/design/PPT.jpg",
+    "Report Design": "/thumbnails/design/Report design.jpg",
+    "Event Based Assets": "/thumbnails/design/Event based assets.jpg",
+    "eBooks": "/thumbnails/design/ebooks.jpg",
+    "Print Publications": "/thumbnails/design/Print publications.jpg",
   },
   videos: {
-    "Motion Graphics": thumbVideoMotion,
-    "Motion Graphics with Character Animation": thumbVideoMotion,
-    "Footage / Image Based": thumbVideoFootage,
-    "Reels and Shorts": thumbVideoReels,
-    "Podcast Interviews": thumbVideoPodcast,
-    "Podcast / Thought Leadership Interviews": thumbVideoPodcast,
-    "Training Videos": thumbVideoTraining,
-    "Whiteboard Animation": thumbVideoWhiteboard,
+    "Motion Graphics": "/thumbnails/video/Motion graphics.jpg",
+    "Motion Graphics with Character Animation": "/thumbnails/video/Motion graphics.jpg",
+    "Footage / Image Based": "/thumbnails/video/Footage-Image based.jpg",
+    "Reels and Shorts": "/thumbnails/video/Reels and shorts.jpg",
+    "Podcast Interviews": "/thumbnails/video/Podcast.jpg",
+    "Podcast / Thought Leadership Interviews": "/thumbnails/video/Podcast.jpg",
+    "Training Videos": "/thumbnails/video/Training videos.jpg",
+    "Whiteboard Animation": "/thumbnails/video/Whiteboard animation.jpg",
   },
   social: {
-    "Static Post Design": thumbSocialStatic,
-    "Carousel": thumbSocialCarousel,
-    "GIFs": thumbSocialGifs,
-    "Teasers": thumbSocialTeaser,
-    "Memes": thumbSocialMemes,
-    "Corporate Comics": thumbSocialComics,
+    "Static Post Design": "/thumbnails/social/Static post.jpg",
+    "Carousel": "/thumbnails/social/Carousel.jpg",
+    "GIFs": "/thumbnails/social/GIFs.jpg",
+    "Teasers": "/thumbnails/social/Teaser.jpg",
+    "Memes": "/thumbnails/social/Memes.jpg",
+    "Corporate Comics": "/thumbnails/social/Corporate comics.jpg",
   },
 };
 
