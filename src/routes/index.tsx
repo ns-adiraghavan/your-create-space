@@ -1252,15 +1252,17 @@ function CategoryStrip({ selected, onSelect, mobile }) {
     }}>
       <div style={{
         display: "grid",
-        gridTemplateColumns: mobile ? "repeat(2, 1fr)" : "repeat(4, 1fr)",
+        gridTemplateColumns: mobile ? "repeat(2, 1fr)" : `repeat(${CATS.length}, 1fr)`,
         border: `1px solid ${NS.rule}`,
         background: NS.surface,
       }}>
         {CATS.map((cat, i) => {
           const active = cat.id === selected;
           const isLast = i === CATS.length - 1;
-          const isRightEdge = mobile ? (i % 2 === 1) : isLast;
-          const isBottomEdge = mobile ? (i >= 2) : true;
+          const mobileCols = 2;
+          const mobileLastRowStart = Math.floor((CATS.length - 1) / mobileCols) * mobileCols;
+          const isRightEdge = mobile ? (i % 2 === 1 || isLast) : isLast;
+          const isBottomEdge = mobile ? (i >= mobileLastRowStart) : true;
           return (
             <StripTile
               key={cat.id}
