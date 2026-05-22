@@ -332,7 +332,7 @@ const CURATED = {
 
 const CONTENT_SUBS = [
   { id: "tl",    name: "Thought Leadership", kind: "parent", formats: ["Whitepaper","POV","TL Blog","eBook"] },
-  { id: "short", name: "Short-form",         kind: "parent", formats: ["Emailer","Case Study","Video Script"] },
+  { id: "short", name: "Short-form",         kind: "parent", formats: ["Emailer","Case Study","Video Script","Brochure"] },
 ];
 
 const DESIGN_FORMATS = Object.keys(CURATED.design);
