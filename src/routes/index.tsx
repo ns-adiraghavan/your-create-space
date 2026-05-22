@@ -2041,6 +2041,7 @@ function NetscribesShowcase() {
     const formats =
       selected === "design" ? DESIGN_FORMATS :
       selected === "videos" ? VIDEO_FORMATS :
+      selected === "gtm"    ? GTM_FORMATS :
                               SOCIAL_FORMATS;
     return <FormatGrid formats={formats} category={selected} accent={cat.color}
       industry={industry} onPreview={handlePreview} mobile={mobile}/>;
