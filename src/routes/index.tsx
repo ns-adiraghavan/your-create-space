@@ -1189,7 +1189,7 @@ function HeroTile({ cat, index, onClick, mobile }) {
           letterSpacing: "0.12em",
           color: hov ? "rgba(255,255,255,0.7)" : NS.muted,
           transition: "color 0.32s",
-        }}>{cat.num} / 04</span>
+        }}>{cat.num} / {String(CATS.length).padStart(2, "0")}</span>
         <span style={{
           fontSize: 10, fontWeight: 700, letterSpacing: "0.24em",
           textTransform: "uppercase",
