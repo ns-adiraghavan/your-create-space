@@ -39,6 +39,7 @@ const THUMBNAILS: Record<string, Record<string, string>> = {
     "Case Study": thumbShortCaseStudy,
     "Emailer": thumbShortEmailer,
     "Video Script": thumbShortVideoScript,
+    "Brochure": thumbShortBrochure,
   },
   gtm: {
     "GTM Studies": thumbGTMStudies,
