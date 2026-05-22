@@ -103,10 +103,11 @@ const NS = {
 // ─── Data ─────────────────────────────────────────────────────────
 
 const CATS = [
-  { id: "content", num: "01", label: "Content",      color: NS.blue,     tag: "Editorial",   blurb: "Long & short-form copy" },
-  { id: "design",  num: "02", label: "Design",       color: NS.red,      tag: "Visual",      blurb: "Layouts, reports, banners" },
-  { id: "videos",  num: "03", label: "Videos",       color: NS.blueDeep, tag: "Motion",      blurb: "Explainers, training, reels" },
-  { id: "social",  num: "04", label: "Social Media", color: NS.redDeep,  tag: "Distributed", blurb: "Posts, carousels, campaigns" },
+  { id: "content", num: "01", label: "Content",         color: NS.blue,     tag: "Editorial",   blurb: "Long & short-form copy" },
+  { id: "design",  num: "02", label: "Design",          color: NS.red,      tag: "Visual",      blurb: "Layouts, reports, banners" },
+  { id: "videos",  num: "03", label: "Videos",          color: NS.blueDeep, tag: "Motion",      blurb: "Explainers, training, reels" },
+  { id: "social",  num: "04", label: "Social Media",    color: NS.redDeep,  tag: "Distributed", blurb: "Posts, carousels, campaigns" },
+  { id: "gtm",     num: "05", label: "GTM Frameworks",  color: NS.blueSoft, tag: "Strategy",    blurb: "Go-to-market studies & playbooks" },
 ];
 
 const CAT_BY_ID = Object.fromEntries(CATS.map(c => [c.id, c]));
