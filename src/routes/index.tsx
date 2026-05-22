@@ -191,7 +191,7 @@ const CURATED = {
       { title: "Research Report: India PE-VC Funds", desc: "Structured research report on PE/VC fund activity, deals, and sector focus in India.", industry: "bfsi", ...driveFile("1_2bf9IXspRLFymyXkMkVZv21_k9WA5ox") },
     ],
     "Event Based Assets": [
-      { title: "Standee: Hi-Tech Industry Event", desc: "Large-format pull-up standee design for a hi-tech trade event — brand identity applied to print at scale.", industry: "tech", ...driveFile("1FLV32LpxOX8XyhJJ-dLJtdaHR9Xls1fj") },
+      { title: "Standee: Hi-Tech Industry Event", desc: "Large-format pull-up standee design for a hi-tech trade event — brand identity applied to print at scale.", industry: "tech", ...driveFile("1eNfZ-Ev3nF5-HZSVA2aG6GdiA98sR59Z") },
     ],
     "eBooks": [
       { title: "eBook Design: The Future of Healthcare", desc: "Fully typeset and designed eBook on digital health — precision medicine, connected care, and emerging delivery models.", industry: "health", ...driveFile("1smkXa0orgul64oH-Y_qD5KLd-KGB4Za3") },
@@ -240,16 +240,26 @@ const CURATED = {
       { title: "GIF: Storage Water Heater — Product Features", desc: "Product feature GIF for a retail/manufacturing brand — animated benefit callouts for Instagram Stories.", industry: "retail", ...driveFile("1tLwrGAD1Y_jNdARiaY9W1ue95p3-iScN") },
     ],
     "Teasers": [
-      { title: "Video Teaser: Perspectives Volume", desc: "15-second social teaser driving views to a thought leadership content series — fast cuts with branded typography.", industry: "tech", ...driveFile("1ZBddm4aEjdTv-tebAADxOlAqRRGyJuat") },
+      { title: "Video Teaser: Perspectives Volume", desc: "15-second social teaser driving views to a thought leadership content series — fast cuts with branded typography.", industry: "tech", ...driveFile("1PaTvYixFwW7u7rH1AaF2mLURYobn0bFN") },
     ],
     "Memes": [
-      { title: "Meme Series: Trading (4-part)", desc: "Four-part branded meme series for a BFSI/fintech brand — platform-native humour with on-brand visual treatment.", industry: "bfsi", ...driveFile("11jPMfO7vVdN3OtHLb1P-8CsTJqXe1nNI") },
+      { title: "Meme Series: Trading — Part 1", desc: "Four-part branded meme series for a BFSI/fintech brand — platform-native humour with on-brand visual treatment.", industry: "bfsi", ...driveFile("11jPMfO7vVdN3OtHLb1P-8CsTJqXe1nNI") },
+      { title: "Meme Series: Trading — Part 2", desc: "Four-part branded meme series for a BFSI/fintech brand — platform-native humour with on-brand visual treatment.", industry: "bfsi", ...driveFile("1_A81RWru1KbsmNOxOcHFQVGjrbvkEaRA") },
+      { title: "Meme Series: Trading — Part 3", desc: "Four-part branded meme series for a BFSI/fintech brand — platform-native humour with on-brand visual treatment.", industry: "bfsi", ...driveFile("1El0FiSXLGAV_fhAR_6xf6MXzZ4OjHxOF") },
+      { title: "Meme Series: Trading — Part 4", desc: "Four-part branded meme series for a BFSI/fintech brand — platform-native humour with on-brand visual treatment.", industry: "bfsi", ...driveFile("19jBuPumxzjS82asIHgWdrGPyA9HtgULI") },
     ],
     "Carousel": [
       { title: "Carousel: Tech Solutions Streamline Collaborations", desc: "5-slide LinkedIn carousel on enterprise tech benefits — each slide pairs a bold stat with a reason-to-believe visual.", industry: "tech", ...driveFile("1IJCyMq4oemXYN8g4rKi9N23o_96geyPN") },
     ],
     "Corporate Comics": [
       { title: "Corporate Comic: Worker Safety Solution", desc: "Single-panel branded comic on workplace safety automation — on-brand illustration style for LinkedIn.", industry: "mfg", ...driveFile("1z-m4dJZpouBMxNiUI9ektFBblL203Gp_") },
+    ],
+  },
+  gtm: {
+    "GTM Studies": [
+      { title: "AI Adoption in Telecom Sector", desc: "Global benchmarking study on AI maturity across telecom operators — primary research across 300 decision-makers and 10 expert IDIs spanning NA, Europe, APAC, and MEA, with GTM and thought leadership recommendations.", industry: "telecom", ...driveFile("1uunITQV7F9LnbYhzo5BkbMVjgXUeRRlo") },
+      { title: "Enterprise Connectivity Service Delivery for Indian SMEs", desc: "Competitive benchmarking study mapping end-to-end service delivery processes of five leading enterprise connectivity providers for B2B SME clients across India’s tier-1 cities.", industry: "telecom", ...driveFile("1Ooa0rlcgV0QUWPwlDBsx0DE-XrGXu44B") },
+      { title: "ISP Market Landscape Study: Nigeria & DRC", desc: "Market entry study on the ISP landscape in Nigeria and Democratic Republic of Congo — covering ICT value chain, regulatory framework, competitive dynamics, and market opportunities across B2B and consumer segments.", industry: "telecom", ...driveFile("152PAHbSYaOlGH50TfUUpsXzJ5DId4y2o") },
     ],
   },
 };
