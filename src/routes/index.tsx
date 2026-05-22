@@ -1146,8 +1146,12 @@ function HeroTiles({ onSelect, mobile }) {
 
 function HeroTile({ cat, index, onClick, mobile }) {
   const [hov, setHov] = useState(false);
-  const isRight = !mobile && (index % 2 === 1);
-  const isBottom = mobile ? (index === CATS.length - 1) : (index >= 2);
+  const total = CATS.length;
+  const cols = mobile ? 1 : 2;
+  const lastRowStart = Math.floor((total - 1) / cols) * cols;
+  const spanFull = !mobile && (index === total - 1) && (total % cols === 1);
+  const isRight = !mobile && (spanFull || index % 2 === 1);
+  const isBottom = index >= lastRowStart;
 
   return (
     <button
@@ -1156,6 +1160,7 @@ function HeroTile({ cat, index, onClick, mobile }) {
       onMouseLeave={() => setHov(false)}
       style={{
         textAlign: "left",
+        gridColumn: spanFull ? "1 / -1" : undefined,
         background: hov ? cat.color : NS.surface,
         border: "none",
         borderRight: !isRight ? `1px solid ${NS.rule}` : "none",
