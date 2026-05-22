@@ -27,6 +27,7 @@ import thumbSocialComics from "@/assets/thumbnails/social/Corporate comics.jpg";
 import thumbShortCaseStudy from "@/assets/thumbnails/content/short form/Case_Study.jpg";
 import thumbShortEmailer from "@/assets/thumbnails/content/short form/Emailer.jpg";
 import thumbShortVideoScript from "@/assets/thumbnails/content/short form/Video_Script.jpg";
+import thumbShortBrochure from "@/assets/thumbnails/content/short form/brochure.jpg";
 import thumbGTMStudies from "@/assets/thumbnails/GTM/GTM.jpg";
 
 const THUMBNAILS: Record<string, Record<string, string>> = {
