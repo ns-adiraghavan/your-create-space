@@ -199,6 +199,16 @@ const CURATED = {
       { title: "Video Script: Explainer for Cognitive Process Automation", desc: "Animated explainer script with scene-level visualization directions for a CPA / AI+RPA product.", industry: "tech", ...driveFile("1J6lm-WcCzp4GCKSheO-4j3k2-U9cIXpj") },
       { title: "Video Script & Visualization: Procurement", desc: "Motion-graphic script with detailed visual directions for a supply chain procurement explainer.", industry: "mfg", ...driveFile("1fZ03ybEle3yfzXmY6jByO3Eklrbd7S9T") },
     ],
+    "Brochure": [
+      { title: "Brochure: IT Services Delivery Center", desc: "Corporate brochure for an IT services delivery centre — capabilities overview, engagement models, and value proposition for enterprise clients.", industry: "tech", ...driveFile("1N-b6nxkdTi4-bPEAGP1VOoQd4HOY4Wg5") },
+      { title: "Brochure: Netscribes Intelligence Store — Premium Technology Analysis", desc: "Product brochure for the Netscribes Intelligence Store — positioning, coverage areas, and subscription tiers for technology research buyers.", industry: "tech", ...driveFile("1zgM_qZXSagPFyR4NsZuUWMr9-NjdXrnN") },
+      { title: "Brochure: Automotive Engineering Services", desc: "Capabilities brochure for an automotive engineering services provider — ADAS, electrification, and embedded systems service lines.", industry: "auto", ...driveFile("1aB9ZDrNnDgBLivesN4qcBi8wfX3UoWYT") },
+      { title: "Brochure: eMobility Twin Architecture", desc: "Technical brochure on a digital twin platform for eMobility — real-time vehicle simulation, battery modelling, and fleet analytics.", industry: "auto", ...driveFile("1up-cZulF6lA27isdnrCZZbXnFe4KbFE7") },
+      { title: "Brochure: V2V Solution", desc: "Product brochure for a vehicle-to-vehicle communication solution — safety use cases, connectivity architecture, and OEM integration.", industry: "auto", ...driveFile("1ZmJPM6V87rMIMPPznMSZHA3eYMqixJEi") },
+      { title: "Brochure: Convenience Store Analytics", desc: "Solution brochure for a retail analytics platform targeting convenience store operators — footfall, basket size, and planogram optimisation.", industry: "retail", ...driveFile("1ij5BcfwjvCLcDDxj9SwJNFhwdTsN8XMe") },
+      { title: "Brochure: Data De-Identification Service", desc: "Service brochure on data de-identification and privacy engineering — compliance with GDPR, HIPAA, and enterprise data governance frameworks.", industry: "health", ...driveFile("1Hu-DqNWYltwJrHrt99r_M-g-pxutNlub") },
+      { title: "Brochure: Business Flow Observability Solution", desc: "Product brochure for an iControl-based business flow observability platform — real-time monitoring, anomaly detection, and ops integration.", industry: "mfg", ...driveFile("11hniIUaa9Ahr7I26ehBI8CKBKexLCfAS") },
+    ],
   },
   design: {
     "Infographics": [
