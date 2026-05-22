@@ -24,6 +24,10 @@ import thumbSocialGifs from "@/assets/thumbnails/social/GIFs.jpg";
 import thumbSocialTeaser from "@/assets/thumbnails/social/Teaser.jpg";
 import thumbSocialMemes from "@/assets/thumbnails/social/Memes.jpg";
 import thumbSocialComics from "@/assets/thumbnails/social/Corporate comics.jpg";
+import thumbShortCaseStudy from "@/assets/thumbnails/content/short form/Case_Study.jpg";
+import thumbShortEmailer from "@/assets/thumbnails/content/short form/Emailer.jpg";
+import thumbShortVideoScript from "@/assets/thumbnails/content/short form/Video_Script.jpg";
+import thumbGTMStudies from "@/assets/thumbnails/GTM/GTM.jpg";
 
 const THUMBNAILS: Record<string, Record<string, string>> = {
   content: {
@@ -31,6 +35,12 @@ const THUMBNAILS: Record<string, Record<string, string>> = {
     "POV": thumbTLPOV,
     "TL Blog": thumbTLBlog,
     "eBook": thumbTLEbook,
+    "Case Study": thumbShortCaseStudy,
+    "Emailer": thumbShortEmailer,
+    "Video Script": thumbShortVideoScript,
+  },
+  gtm: {
+    "GTM Studies": thumbGTMStudies,
   },
   design: {
     "Infographics": thumbDesignInfographics,
@@ -93,10 +103,11 @@ const NS = {
 // ─── Data ─────────────────────────────────────────────────────────
 
 const CATS = [
-  { id: "content", num: "01", label: "Content",      color: NS.blue,     tag: "Editorial",   blurb: "Long & short-form copy" },
-  { id: "design",  num: "02", label: "Design",       color: NS.red,      tag: "Visual",      blurb: "Layouts, reports, banners" },
-  { id: "videos",  num: "03", label: "Videos",       color: NS.blueDeep, tag: "Motion",      blurb: "Explainers, training, reels" },
-  { id: "social",  num: "04", label: "Social Media", color: NS.redDeep,  tag: "Distributed", blurb: "Posts, carousels, campaigns" },
+  { id: "content", num: "01", label: "Content",         color: NS.blue,     tag: "Editorial",   blurb: "Long & short-form copy" },
+  { id: "design",  num: "02", label: "Design",          color: NS.red,      tag: "Visual",      blurb: "Layouts, reports, banners" },
+  { id: "videos",  num: "03", label: "Videos",          color: NS.blueDeep, tag: "Motion",      blurb: "Explainers, training, reels" },
+  { id: "social",  num: "04", label: "Social Media",    color: NS.redDeep,  tag: "Distributed", blurb: "Posts, carousels, campaigns" },
+  { id: "gtm",     num: "05", label: "GTM Frameworks",  color: NS.blueSoft, tag: "Strategy",    blurb: "Go-to-market studies & playbooks" },
 ];
 
 const CAT_BY_ID = Object.fromEntries(CATS.map(c => [c.id, c]));
@@ -251,6 +262,7 @@ const CONTENT_SUBS = [
 const DESIGN_FORMATS = Object.keys(CURATED.design);
 const VIDEO_FORMATS  = Object.keys(CURATED.videos);
 const SOCIAL_FORMATS = Object.keys(CURATED.social);
+const GTM_FORMATS    = ["GTM Studies"];
 
 // ─── Hooks ────────────────────────────────────────────────────────
 
@@ -1134,8 +1146,12 @@ function HeroTiles({ onSelect, mobile }) {
 
 function HeroTile({ cat, index, onClick, mobile }) {
   const [hov, setHov] = useState(false);
-  const isRight = !mobile && (index % 2 === 1);
-  const isBottom = mobile ? (index === CATS.length - 1) : (index >= 2);
+  const total = CATS.length;
+  const cols = mobile ? 1 : 2;
+  const lastRowStart = Math.floor((total - 1) / cols) * cols;
+  const spanFull = !mobile && (index === total - 1) && (total % cols === 1);
+  const isRight = !mobile && (spanFull || index % 2 === 1);
+  const isBottom = index >= lastRowStart;
 
   return (
     <button
@@ -1144,6 +1160,7 @@ function HeroTile({ cat, index, onClick, mobile }) {
       onMouseLeave={() => setHov(false)}
       style={{
         textAlign: "left",
+        gridColumn: spanFull ? "1 / -1" : undefined,
         background: hov ? cat.color : NS.surface,
         border: "none",
         borderRight: !isRight ? `1px solid ${NS.rule}` : "none",
@@ -1172,7 +1189,7 @@ function HeroTile({ cat, index, onClick, mobile }) {
           letterSpacing: "0.12em",
           color: hov ? "rgba(255,255,255,0.7)" : NS.muted,
           transition: "color 0.32s",
-        }}>{cat.num} / 04</span>
+        }}>{cat.num} / {String(CATS.length).padStart(2, "0")}</span>
         <span style={{
           fontSize: 10, fontWeight: 700, letterSpacing: "0.24em",
           textTransform: "uppercase",
@@ -1235,15 +1252,17 @@ function CategoryStrip({ selected, onSelect, mobile }) {
     }}>
       <div style={{
         display: "grid",
-        gridTemplateColumns: mobile ? "repeat(2, 1fr)" : "repeat(4, 1fr)",
+        gridTemplateColumns: mobile ? "repeat(2, 1fr)" : `repeat(${CATS.length}, 1fr)`,
         border: `1px solid ${NS.rule}`,
         background: NS.surface,
       }}>
         {CATS.map((cat, i) => {
           const active = cat.id === selected;
           const isLast = i === CATS.length - 1;
-          const isRightEdge = mobile ? (i % 2 === 1) : isLast;
-          const isBottomEdge = mobile ? (i >= 2) : true;
+          const mobileCols = 2;
+          const mobileLastRowStart = Math.floor((CATS.length - 1) / mobileCols) * mobileCols;
+          const isRightEdge = mobile ? (i % 2 === 1 || isLast) : isLast;
+          const isBottomEdge = mobile ? (i >= mobileLastRowStart) : true;
           return (
             <StripTile
               key={cat.id}
@@ -2022,6 +2041,7 @@ function NetscribesShowcase() {
     const formats =
       selected === "design" ? DESIGN_FORMATS :
       selected === "videos" ? VIDEO_FORMATS :
+      selected === "gtm"    ? GTM_FORMATS :
                               SOCIAL_FORMATS;
     return <FormatGrid formats={formats} category={selected} accent={cat.color}
       industry={industry} onPreview={handlePreview} mobile={mobile}/>;
