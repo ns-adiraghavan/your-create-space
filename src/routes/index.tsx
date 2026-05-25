@@ -15,7 +15,7 @@ const THUMBNAILS: Record<string, Record<string, string>> = {
     "Brochure": "/thumbnails/content/short-form/brochure.jpg",
   },
   gtm: {
-    "GTM Studies": "/thumbnails/GTM/GTM.jpg",
+    "GTM": "/thumbnails/GTM/GTM.jpg",
   },
   design: {
     "Infographics": "/thumbnails/design/Infographics.jpg",
@@ -82,7 +82,7 @@ const CATS = [
   { id: "design",  num: "02", label: "Design",          color: NS.red,      tag: "Visual",      blurb: "Layouts, reports, banners" },
   { id: "videos",  num: "03", label: "Videos",          color: NS.redDeep,  tag: "Motion",      blurb: "Explainers, training, reels" },
   { id: "social",  num: "04", label: "Social Media",    color: NS.blueDeep, tag: "Distributed", blurb: "Posts, carousels, campaigns" },
-  { id: "gtm",     num: "05", label: "GTM Frameworks",  color: NS.blueSoft, tag: "Strategy",    blurb: "Go-to-market studies & playbooks" },
+  { id: "gtm",     num: "05", label: "Insights",         color: NS.blueSoft, tag: "Strategy",    blurb: "Go-to-market studies & playbooks" },
 ];
 
 const CAT_BY_ID = Object.fromEntries(CATS.map(c => [c.id, c]));
@@ -407,26 +407,32 @@ const CURATED = {
     ],
   },
   gtm: {
-    "GTM Studies": [
+    "Industry Analysis": [],
+    "GTM": [
       {
-  title: "ISP Market Landscape Study",
-  desc: "Market assessment and landscape study of the ISP ecosystem, regulatory frameworks, and key players across Nigeria and DRC to support strategic market entry decisions.",
-  industry: "telecom",
-  ...driveFile("152PAHbSYaOlGH50TfUUpsXzJ5DId4y2o"),
-},
-{
-  title: "Enterprise Connectivity Service Delivery Process for Indian SMEs",
-  desc: "Competitors' benchmarking study analyzing end-to-end service delivery workflows to pinpoint timeline delays and optimize B2B telecom process efficiency.",
-  industry: "telecom",
-  ...driveFile("1Ooa0rlcgV0QUWPwlDBsx0DE-XrGXu44B"),
-},
-{
-  title: "AI Adoption in Telecom Sector",
-  desc: "Global benchmarking study evaluating regional AI maturity, high-impact operator use cases, and capability gaps to sharpen GTM positioning.",
-  industry: "telecom",
-  ...driveFile("1uunITQV7F9LnbYhzo5BkbMVjgXUeRRlo"),
-},
+        title: "ISP Market Landscape Study",
+        desc: "Market assessment and landscape study of the ISP ecosystem, regulatory frameworks, and key players across Nigeria and DRC to support strategic market entry decisions.",
+        industry: "telecom",
+        ...driveFile("152PAHbSYaOlGH50TfUUpsXzJ5DId4y2o"),
+      },
+      {
+        title: "Enterprise Connectivity Service Delivery Process for Indian SMEs",
+        desc: "Competitors' benchmarking study analyzing end-to-end service delivery workflows to pinpoint timeline delays and optimize B2B telecom process efficiency.",
+        industry: "telecom",
+        ...driveFile("1Ooa0rlcgV0QUWPwlDBsx0DE-XrGXu44B"),
+      },
+      {
+        title: "AI Adoption in Telecom Sector",
+        desc: "Global benchmarking study evaluating regional AI maturity, high-impact operator use cases, and capability gaps to sharpen GTM positioning.",
+        industry: "telecom",
+        ...driveFile("1uunITQV7F9LnbYhzo5BkbMVjgXUeRRlo"),
+      },
     ],
+    "Competitive Intelligence & Benchmarking": [],
+    "Consumer Research": [],
+    "AI Readiness Assessment": [],
+    "Sales Enablement": [],
+    "Others": [],
   },
 };
 
@@ -439,7 +445,7 @@ const CONTENT_SUBS = [
 const DESIGN_FORMATS = Object.keys(CURATED.design);
 const VIDEO_FORMATS  = Object.keys(CURATED.videos);
 const SOCIAL_FORMATS = Object.keys(CURATED.social);
-const GTM_FORMATS    = ["GTM Studies"];
+const GTM_FORMATS    = Object.keys(CURATED.gtm);
 
 // ─── Hooks ────────────────────────────────────────────────────────
 
