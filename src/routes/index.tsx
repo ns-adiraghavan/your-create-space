@@ -16,6 +16,10 @@ const THUMBNAILS: Record<string, Record<string, string>> = {
   },
   gtm: {
     "GTM": "/thumbnails/GTM/GTM.jpg",
+    "Industry Analysis": "/thumbnails/GTM/Industry Analysis.jpg",
+    "Competitive Intelligence & Benchmarking": "/thumbnails/GTM/Competitive Intelligence & Benchmarking.jpg",
+    "Consumer Research": "/thumbnails/GTM/Consumer Research.jpg",
+    "AI Readiness Assessment": "/thumbnails/GTM/AI Readiness Assessment.jpg",
   },
   design: {
     "Infographics": "/thumbnails/design/Infographics.jpg",
@@ -498,8 +502,6 @@ const CURATED = {
       // ── Technology & Software ──
       { title: "AI Ethics and Transparency Impact Assessment", desc: "Assessment of enterprise AI ethics posture and transparency readiness — governance frameworks, bias risk, and regulatory alignment across tech deployments.", industry: "tech", ...driveFile("1wXRTTI0H3xtez_0dEqNHssda7-eXHdsY") },
     ],
-    "Sales Enablement": [],
-    "Others": [],
   },
 };
 
