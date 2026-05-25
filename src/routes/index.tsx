@@ -2089,7 +2089,10 @@ function SampleViewer({ payload, onClose, onBack }) {
             <iframe
               src={sample.driveEmbedUrl}
               title={sample.title}
-              style={{ width: "100%", height: "calc(100% + 50px)", marginBottom: "-50px", border: "none", display: "block" }}
+              style={category === "videos" || category === "social"
+                ? { width: "100%", height: "100%", border: "none", display: "block" }
+                : { width: "100%", height: "calc(100% + 80px)", marginTop: "-40px", marginBottom: "-40px", border: "none", display: "block" }
+              }
               allow="autoplay"
               sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
             />
