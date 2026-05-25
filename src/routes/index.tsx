@@ -408,12 +408,28 @@ const CURATED = {
   },
   gtm: {
     "GTM Studies": [
-      { title: "AI Adoption in Telecom Sector", desc: "Global benchmarking study on AI maturity across telecom operators — primary research across 300 decision-makers and 10 expert IDIs spanning NA, Europe, APAC, and MEA, with GTM and thought leadership recommendations.", industry: "telecom", ...driveFile("1uunITQV7F9LnbYhzo5BkbMVjgXUeRRlo") },
-      { title: "Enterprise Connectivity Service Delivery for Indian SMEs", desc: "Competitive benchmarking study mapping end-to-end service delivery processes of five leading enterprise connectivity providers for B2B SME clients across India’s tier-1 cities.", industry: "telecom", ...driveFile("1Ooa0rlcgV0QUWPwlDBsx0DE-XrGXu44B") },
-      { title: "ISP Market Landscape Study: Nigeria & DRC", desc: "Market entry study on the ISP landscape in Nigeria and Democratic Republic of Congo — covering ICT value chain, regulatory framework, competitive dynamics, and market opportunities across B2B and consumer segments.", industry: "telecom", ...driveFile("152PAHbSYaOlGH50TfUUpsXzJ5DId4y2o") },
+      {
+  title: "ISP Market Landscape Study",
+  desc: "Market assessment and landscape study of the ISP ecosystem, regulatory frameworks, and key players across Nigeria and DRC to support strategic market entry decisions.",
+  industry: "telecom",
+  ...driveFile("152PAHbSYaOlGH50TfUUpsXzJ5DId4y2o"),
+},
+{
+  title: "Enterprise Connectivity Service Delivery Process for Indian SMEs",
+  desc: "Competitors' benchmarking study analyzing end-to-end service delivery workflows to pinpoint timeline delays and optimize B2B telecom process efficiency.",
+  industry: "telecom",
+  ...driveFile("1Ooa0rlcgV0QUWPwlDBsx0DE-XrGXu44B"),
+},
+{
+  title: "AI Adoption in Telecom Sector",
+  desc: "Global benchmarking study evaluating regional AI maturity, high-impact operator use cases, and capability gaps to sharpen GTM positioning.",
+  industry: "telecom",
+  ...driveFile("1uunITQV7F9LnbYhzo5BkbMVjgXUeRRlo"),
+},
     ],
   },
 };
+
 
 const CONTENT_SUBS = [
   { id: "tl",    name: "Thought Leadership", kind: "parent", formats: ["Whitepaper","POV","TL Blog","eBook"] },
