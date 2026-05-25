@@ -82,7 +82,7 @@ const CATS = [
   { id: "design",  num: "02", label: "Design",          color: NS.red,      tag: "Visual",      blurb: "Layouts, reports, banners" },
   { id: "videos",  num: "03", label: "Videos",          color: NS.redDeep,  tag: "Motion",      blurb: "Explainers, training, reels" },
   { id: "social",  num: "04", label: "Social Media",    color: NS.blueDeep, tag: "Distributed", blurb: "Posts, carousels, campaigns" },
-  { id: "gtm",     num: "05", label: "GTM Frameworks",  color: NS.blueSoft, tag: "Strategy",    blurb: "Go-to-market studies & playbooks" },
+  { id: "gtm",     num: "05", label: "Insights",         color: NS.blueSoft, tag: "Strategy",    blurb: "Go-to-market studies & playbooks" },
 ];
 
 const CAT_BY_ID = Object.fromEntries(CATS.map(c => [c.id, c]));
