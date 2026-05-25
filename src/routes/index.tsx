@@ -407,26 +407,32 @@ const CURATED = {
     ],
   },
   gtm: {
-    "GTM Studies": [
+    "Industry Analysis": [],
+    "GTM": [
       {
-  title: "ISP Market Landscape Study",
-  desc: "Market assessment and landscape study of the ISP ecosystem, regulatory frameworks, and key players across Nigeria and DRC to support strategic market entry decisions.",
-  industry: "telecom",
-  ...driveFile("152PAHbSYaOlGH50TfUUpsXzJ5DId4y2o"),
-},
-{
-  title: "Enterprise Connectivity Service Delivery Process for Indian SMEs",
-  desc: "Competitors' benchmarking study analyzing end-to-end service delivery workflows to pinpoint timeline delays and optimize B2B telecom process efficiency.",
-  industry: "telecom",
-  ...driveFile("1Ooa0rlcgV0QUWPwlDBsx0DE-XrGXu44B"),
-},
-{
-  title: "AI Adoption in Telecom Sector",
-  desc: "Global benchmarking study evaluating regional AI maturity, high-impact operator use cases, and capability gaps to sharpen GTM positioning.",
-  industry: "telecom",
-  ...driveFile("1uunITQV7F9LnbYhzo5BkbMVjgXUeRRlo"),
-},
+        title: "ISP Market Landscape Study",
+        desc: "Market assessment and landscape study of the ISP ecosystem, regulatory frameworks, and key players across Nigeria and DRC to support strategic market entry decisions.",
+        industry: "telecom",
+        ...driveFile("152PAHbSYaOlGH50TfUUpsXzJ5DId4y2o"),
+      },
+      {
+        title: "Enterprise Connectivity Service Delivery Process for Indian SMEs",
+        desc: "Competitors' benchmarking study analyzing end-to-end service delivery workflows to pinpoint timeline delays and optimize B2B telecom process efficiency.",
+        industry: "telecom",
+        ...driveFile("1Ooa0rlcgV0QUWPwlDBsx0DE-XrGXu44B"),
+      },
+      {
+        title: "AI Adoption in Telecom Sector",
+        desc: "Global benchmarking study evaluating regional AI maturity, high-impact operator use cases, and capability gaps to sharpen GTM positioning.",
+        industry: "telecom",
+        ...driveFile("1uunITQV7F9LnbYhzo5BkbMVjgXUeRRlo"),
+      },
     ],
+    "Competitive Intelligence & Benchmarking": [],
+    "Consumer Research": [],
+    "AI Readiness Assessment": [],
+    "Sales Enablement": [],
+    "Others": [],
   },
 };
 
