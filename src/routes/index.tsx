@@ -15,7 +15,13 @@ const THUMBNAILS: Record<string, Record<string, string>> = {
     "Brochure": "/thumbnails/content/short-form/brochure.jpg",
   },
   gtm: {
+    "Industry Analysis": "/thumbnails/GTM/Industry Analysis.jpg",
     "GTM": "/thumbnails/GTM/GTM.jpg",
+    "Competitive Intelligence & Benchmarking": "/thumbnails/GTM/Competitive Intelligence & Benchmarking.jpg",
+    "Consumer Research": "/thumbnails/GTM/Consumer Research.jpg",
+    "AI Readiness Assessment": "/thumbnails/GTM/AI Readiness Assessment.jpg",
+    "Sales Enablement": "/thumbnails/GTM/Sales Enablement.jpg",
+    "Others": "/thumbnails/GTM/Others.jpg",
   },
   design: {
     "Infographics": "/thumbnails/design/Infographics.jpg",
