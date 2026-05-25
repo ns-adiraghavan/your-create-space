@@ -15,11 +15,7 @@ const THUMBNAILS: Record<string, Record<string, string>> = {
     "Brochure": "/thumbnails/content/short-form/brochure.jpg",
   },
   gtm: {
-    "Industry Analysis": "/thumbnails/GTM/Industry Analysis.jpg",
     "GTM": "/thumbnails/GTM/GTM.jpg",
-    "Competitive Intelligence & Benchmarking": "/thumbnails/GTM/Competitive Intelligence & Benchmarking.jpg",
-    "Consumer Research": "/thumbnails/GTM/Consumer Research.jpg",
-    "AI Readiness Assessment": "/thumbnails/GTM/AI Readiness Assessment.jpg",
   },
   design: {
     "Infographics": "/thumbnails/design/Infographics.jpg",
@@ -431,19 +427,19 @@ const CURATED = {
         title: "ISP Market Landscape Study",
         desc: "Market assessment and landscape study of the ISP ecosystem, regulatory frameworks, and key players across Nigeria and DRC to support strategic market entry decisions.",
         industry: "telecom",
-        ...driveFile("152PAHbSYaOlGH50TfUUpsXzJ5DId4y2o"),
+        ...driveFile("1UcAgLoyYIWWv-KxXFLp9qkxHt_4Or96T"),
       },
       {
         title: "Enterprise Connectivity Service Delivery Process for Indian SMEs",
         desc: "Competitors' benchmarking study analyzing end-to-end service delivery workflows to pinpoint timeline delays and optimize B2B telecom process efficiency.",
         industry: "telecom",
-        ...driveFile("1Ooa0rlcgV0QUWPwlDBsx0DE-XrGXu44B"),
+        ...driveFile("1S0d_-frzWrQJJ3pZ2ub8OSiYfkUGlq6I"),
       },
       {
         title: "AI Adoption in Telecom Sector",
         desc: "Global benchmarking study evaluating regional AI maturity, high-impact operator use cases, and capability gaps to sharpen GTM positioning.",
         industry: "telecom",
-        ...driveFile("1uunITQV7F9LnbYhzo5BkbMVjgXUeRRlo"),
+        ...driveFile("10abj6wddyAktZvwSu3mt-S-kYHDh0fWU"),
       },
       // ── BFSI ──
       { title: "GTM Strategy for a Personal Finance Management App", desc: "Go-to-market strategy defining target segments, channel mix, and launch sequencing for a personal finance management application.", industry: "bfsi", ...driveFile("1DZmAbb4CFsDINiGGSx8Q3Y4YBcuN2Rc2") },
@@ -502,6 +498,8 @@ const CURATED = {
       // ── Technology & Software ──
       { title: "AI Ethics and Transparency Impact Assessment", desc: "Assessment of enterprise AI ethics posture and transparency readiness — governance frameworks, bias risk, and regulatory alignment across tech deployments.", industry: "tech", ...driveFile("1wXRTTI0H3xtez_0dEqNHssda7-eXHdsY") },
     ],
+    "Sales Enablement": [],
+    "Others": [],
   },
 };
 
@@ -2089,9 +2087,9 @@ function SampleViewer({ payload, onClose, onBack }) {
         }}>
           {sample.driveEmbedUrl ? (
             <iframe
-              src={sample.driveEmbedUrl}
+              src={sample.driveEmbedUrl + "&toolbar=0&navpanes=0&rm=minimal"}
               title={sample.title}
-              style={{ width: "100%", height: "100%", border: "none", display: "block" }}
+              style={{ width: "100%", height: "calc(100% + 50px)", marginBottom: "-50px", border: "none", display: "block" }}
               allow="autoplay"
               sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
             />
