@@ -16,10 +16,6 @@ const THUMBNAILS: Record<string, Record<string, string>> = {
   },
   gtm: {
     "GTM": "/thumbnails/GTM/GTM.jpg",
-    "Industry Analysis": "/thumbnails/GTM/Industry Analysis.jpg",
-    "Competitive Intelligence & Benchmarking": "/thumbnails/GTM/Competitive Intelligence & Benchmarking.jpg",
-    "Consumer Research": "/thumbnails/GTM/Consumer Research.jpg",
-    "AI Readiness Assessment": "/thumbnails/GTM/AI Readiness Assessment.jpg",
   },
   design: {
     "Infographics": "/thumbnails/design/Infographics.jpg",
@@ -502,6 +498,8 @@ const CURATED = {
       // ── Technology & Software ──
       { title: "AI Ethics and Transparency Impact Assessment", desc: "Assessment of enterprise AI ethics posture and transparency readiness — governance frameworks, bias risk, and regulatory alignment across tech deployments.", industry: "tech", ...driveFile("1wXRTTI0H3xtez_0dEqNHssda7-eXHdsY") },
     ],
+    "Sales Enablement": [],
+    "Others": [],
   },
 };
 
@@ -2067,7 +2065,7 @@ function SampleViewer({ payload, onClose, onBack }) {
     }}>
       <div onClick={e => e.stopPropagation()} style={{
         width: "100%", maxWidth: 960,
-        height: mobile ? "auto" : "fit-content",
+        height: mobile ? "auto" : "86vh",
         maxHeight: "calc(100vh - 40px)",
         background: NS.surface,
         border: `1px solid ${NS.rule}`,
@@ -2083,31 +2081,21 @@ function SampleViewer({ payload, onClose, onBack }) {
           flex: mobile ? "none" : 1,
           width: mobile ? "100%" : "auto",
           height: mobile ? "55vw" : "auto",
-          minHeight: mobile ? undefined : "60vh",
           background: NS.paperDeep,
           position: "relative",
           overflow: "hidden",
         }}>
           {sample.driveEmbedUrl ? (
-            (category === "videos" || category === "social") ? (
-              <iframe
-                src={sample.driveEmbedUrl}
-                title={sample.title}
-                style={{ width: "100%", height: "100%", border: "none", display: "block" }}
-                allow="autoplay"
-                sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
-              />
-            ) : (
-              <div style={{ position: "relative", width: "100%", height: "100%", overflow: "hidden", paddingTop: 10, boxSizing: "border-box" }}>
-                <iframe
-                  src={sample.driveEmbedUrl}
-                  title={sample.title}
-                  style={{ position: "absolute", top: 10, left: 0, width: "100%", height: "calc(100% + 84px)", border: "none" }}
-                  allow="autoplay"
-                  sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
-                />
-              </div>
-            )
+            <iframe
+              src={sample.driveEmbedUrl}
+              title={sample.title}
+              style={category === "videos" || category === "social"
+                ? { width: "100%", height: "100%", border: "none", display: "block" }
+                : { width: "100%", height: "calc(100% + 50px)", marginBottom: "-50px", border: "none", display: "block" }
+              }
+              allow="autoplay"
+              sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
+            />
           ) : (
             <div style={{
               width: "100%", height: "100%",
