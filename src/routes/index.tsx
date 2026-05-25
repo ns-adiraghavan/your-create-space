@@ -445,7 +445,7 @@ const CONTENT_SUBS = [
 const DESIGN_FORMATS = Object.keys(CURATED.design);
 const VIDEO_FORMATS  = Object.keys(CURATED.videos);
 const SOCIAL_FORMATS = Object.keys(CURATED.social);
-const GTM_FORMATS    = ["GTM Studies"];
+const GTM_FORMATS    = Object.keys(CURATED.gtm);
 
 // ─── Hooks ────────────────────────────────────────────────────────
 
