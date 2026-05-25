@@ -2087,7 +2087,7 @@ function SampleViewer({ payload, onClose, onBack }) {
         }}>
           {sample.driveEmbedUrl ? (
             <iframe
-              src={sample.driveEmbedUrl + "&toolbar=0&navpanes=0&rm=minimal"}
+              src={sample.driveEmbedUrl}
               title={sample.title}
               style={{ width: "100%", height: "calc(100% + 50px)", marginBottom: "-50px", border: "none", display: "block" }}
               allow="autoplay"
