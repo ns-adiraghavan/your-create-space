@@ -2088,13 +2088,25 @@ function SampleViewer({ payload, onClose, onBack }) {
           overflow: "hidden",
         }}>
           {sample.driveEmbedUrl ? (
-            <iframe
-              src={sample.driveEmbedUrl}
-              title={sample.title}
-              style={{ width: "100%", height: "100%", border: "none", display: "block" }}
-              allow="autoplay"
-              sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
-            />
+            (category === "videos" || category === "social") ? (
+              <iframe
+                src={sample.driveEmbedUrl}
+                title={sample.title}
+                style={{ width: "100%", height: "100%", border: "none", display: "block" }}
+                allow="autoplay"
+                sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
+              />
+            ) : (
+              <div style={{ position: "relative", width: "100%", height: "100%", overflow: "hidden" }}>
+                <iframe
+                  src={sample.driveEmbedUrl}
+                  title={sample.title}
+                  style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "calc(100% + 52px)", border: "none" }}
+                  allow="autoplay"
+                  sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
+                />
+              </div>
+            )
           ) : (
             <div style={{
               width: "100%", height: "100%",
