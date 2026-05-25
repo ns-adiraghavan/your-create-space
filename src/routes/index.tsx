@@ -15,7 +15,7 @@ const THUMBNAILS: Record<string, Record<string, string>> = {
     "Brochure": "/thumbnails/content/short-form/brochure.jpg",
   },
   gtm: {
-    "GTM Studies": "/thumbnails/GTM/GTM.jpg",
+    "GTM": "/thumbnails/GTM/GTM.jpg",
   },
   design: {
     "Infographics": "/thumbnails/design/Infographics.jpg",
