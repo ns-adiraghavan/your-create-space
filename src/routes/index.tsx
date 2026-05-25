@@ -2067,7 +2067,7 @@ function SampleViewer({ payload, onClose, onBack }) {
     }}>
       <div onClick={e => e.stopPropagation()} style={{
         width: "100%", maxWidth: 960,
-        height: mobile ? "auto" : "86vh",
+        height: mobile ? "auto" : "fit-content",
         maxHeight: "calc(100vh - 40px)",
         background: NS.surface,
         border: `1px solid ${NS.rule}`,
@@ -2083,6 +2083,7 @@ function SampleViewer({ payload, onClose, onBack }) {
           flex: mobile ? "none" : 1,
           width: mobile ? "100%" : "auto",
           height: mobile ? "55vw" : "auto",
+          minHeight: mobile ? undefined : "60vh",
           background: NS.paperDeep,
           position: "relative",
           overflow: "hidden",
