@@ -2097,11 +2097,11 @@ function SampleViewer({ payload, onClose, onBack }) {
                 sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
               />
             ) : (
-              <div style={{ position: "relative", width: "100%", height: "100%", overflow: "hidden" }}>
+              <div style={{ position: "relative", width: "100%", height: "100%", overflow: "hidden", paddingTop: 10, boxSizing: "border-box" }}>
                 <iframe
                   src={sample.driveEmbedUrl}
                   title={sample.title}
-                  style={{ position: "absolute", top: 12, left: 0, width: "100%", height: "calc(100% + 52px)", border: "none" }}
+                  style={{ position: "absolute", top: 10, left: 0, width: "100%", height: "calc(100% + 84px)", border: "none" }}
                   allow="autoplay"
                   sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
                 />
